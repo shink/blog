@@ -295,7 +295,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-all" q-show="innerArchive">
         <div class="search-wrap">
-          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <input class="search-ipt" q-model="search" type="text" placeholder="搜索" onfocus="this.placeholder=''" onblur="this.placeholder='搜索'">
           <i class="icon-search icon" q-show="search|isEmptyStr"></i>
           <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
         </div>
