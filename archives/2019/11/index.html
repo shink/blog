@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://blog.shenke.store">
-  <title>Java建立大顶堆 | 深刻的博客</title>
+  <title>Archives: 2019/11 | 深刻的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Theory从最后一个有孩子的父节点开始调整，若父节点的值小于左右孩子结点的值（如果有的话），就与该孩子结点交换位置。若发生了交换，由于原来父节点到了他的孩子结点上，可能破坏了现在这颗以原来父节点为根节点的子树，所以需要重复以上步骤，即递归。数组的范围是从 0~length-1，设父节点的下标为 p，则： 12p的左孩子下标为：2 * p + 1p的右孩子下标为：2  *p + 2   最后一个有">
-<meta name="keywords" content="算法,Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java建立大顶堆">
-<meta property="og:url" content="http://blog.shenke.store/2019/10/07/build-heap/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="深刻的博客">
+<meta property="og:url" content="http://blog.shenke.store/archives/2019/11/index.html">
 <meta property="og:site_name" content="深刻的博客">
-<meta property="og:description" content="Theory从最后一个有孩子的父节点开始调整，若父节点的值小于左右孩子结点的值（如果有的话），就与该孩子结点交换位置。若发生了交换，由于原来父节点到了他的孩子结点上，可能破坏了现在这颗以原来父节点为根节点的子树，所以需要重复以上步骤，即递归。数组的范围是从 0~length-1，设父节点的下标为 p，则： 12p的左孩子下标为：2 * p + 1p的右孩子下标为：2  *p + 2   最后一个有">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-18T12:28:34.177Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java建立大顶堆">
-<meta name="twitter:description" content="Theory从最后一个有孩子的父节点开始调整，若父节点的值小于左右孩子结点的值（如果有的话），就与该孩子结点交换位置。若发生了交换，由于原来父节点到了他的孩子结点上，可能破坏了现在这颗以原来父节点为根节点的子树，所以需要重复以上步骤，即递归。数组的范围是从 0~length-1，设父节点的下标为 p，则： 12p的左孩子下标为：2 * p + 1p的右孩子下标为：2  *p + 2   最后一个有">
+<meta name="twitter:title" content="深刻的博客">
   
   
     <link rel="icon" href="http://data.shenke.codes/shenke/shenke_circle_small.png">
@@ -144,142 +139,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="article-build-heap" class="article article-type-article " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java建立大顶堆
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-article">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/11/02/surf-the-internet-scientifically/" class="archive-article-date">
+  	<time datetime="2019-11-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-02</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/11/02/surf-the-internet-scientifically/">科学上网</a>
     </h1>
   
 
-
-        
-        <a href="/2019/10/07/build-heap/" class="archive-article-date">
-  	<time datetime="2019-10-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h3><p>从最后一个有孩子的父节点开始调整，若父节点的值小于左右孩子结点的值（如果有的话），就与该孩子结点交换位置。若发生了交换，由于原来父节点到了他的孩子结点上，可能破坏了现在这颗以原来父节点为根节点的子树，所以需要重复以上步骤，即递归。<br>数组的范围是从 0~length-1，设父节点的下标为 p，则：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p的左孩子下标为：2 * p + 1</span><br><span class="line">p的右孩子下标为：2  *p + 2</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>最后一个有孩子的父节点下标为（length - 2）/ 2</p>
-</blockquote>
-<a id="more"></a>
-
-<h3 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildHeap</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] heap, <span class="keyword">int</span> item)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> length = heap.length;</span><br><span class="line">		<span class="keyword">int</span> left = <span class="number">2</span> * item + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> right = <span class="number">2</span> * item + <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> largest;</span><br><span class="line">		<span class="keyword">if</span> (left &lt;= length - <span class="number">1</span> &amp;&amp; heap[left] &gt; heap[item]) &#123;</span><br><span class="line">			largest = left;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			largest = item;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (right &lt;= length - <span class="number">1</span> &amp;&amp; heap[right] &gt; heap[largest]) &#123;</span><br><span class="line">			largest = right;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (largest != item) &#123;</span><br><span class="line">			<span class="comment">// 父节点小于左右孩子结点,需要交换</span></span><br><span class="line">			<span class="keyword">int</span> temp = heap[item];</span><br><span class="line">			heap[item] = heap[largest];</span><br><span class="line">			heap[largest] = temp;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 发生过交换后,原来父结点现在所在位置的值不一定还满足大顶堆的定义，需要递归继续建堆</span></span><br><span class="line">			heapify(heap, largest);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span>[] heap)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> length = heap.length;</span><br><span class="line">		<span class="comment">// 最后一个有孩子的结点的下标</span></span><br><span class="line">		<span class="keyword">int</span> lastParent = (length - <span class="number">2</span>) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> item = lastParent; item &gt;= <span class="number">0</span>; item--) &#123;</span><br><span class="line">			heapify(heap, item);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		BuildHeap buildHeap = <span class="keyword">new</span> BuildHeap();</span><br><span class="line">		<span class="keyword">int</span>[] heap = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">16</span>, <span class="number">14</span>, <span class="number">8</span>, <span class="number">7</span> &#125;;</span><br><span class="line">		buildHeap.build(heap);</span><br><span class="line">		System.out.println(Arrays.toString(heap));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>原文链接：<a href="https://blog.csdn.net/qq_38105251/article/details/102146651" target="_blank" rel="noopener">https://blog.csdn.net/qq_38105251/article/details/102146651</a></p>
-</blockquote>
-
-      
-
-      
-    </div>
-
-    <!-- 添加本文结束标记-->
-    <!-- 
-      <div style="text-align:center;color: #000;font-size:16px;font-weight: bolder;">
-        -------------<i class="fa fa-paw">Thank you for reading</i>-------------
-        </div>
-     -->
-    <!-- 添加完成 -->
-    <!-- <br /> -->
-    
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学上网</a>
         		</li>
       		
 		</ul>
 	</div>
 
+          
 
-      <!-- 开始添加阅读量-->
-      
-        <span id="busuanzi_container_page_pv" style="color: #C0C0C0;">
-          |  阅读 <span id="busuanzi_value_page_pv"></span> 
-        </span>
-      
-      <!-- 添加完成 -->
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/10/16/22/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          22
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/10/07/reverse-integer/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">记录整数反转的溢出问题</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -315,8 +228,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
