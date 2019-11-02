@@ -8,18 +8,21 @@
   <link rel="dns-prefetch" href="http://blog.shenke.store">
   <title>科学上网 | 深刻的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这里都是以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR">
+  <meta name="description" content="这里以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.s">
 <meta name="keywords" content="科学上网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="科学上网">
 <meta property="og:url" content="http://blog.shenke.store/2019/11/02/surf-the-internet-scientifically/index.html">
 <meta property="og:site_name" content="深刻的博客">
-<meta property="og:description" content="这里都是以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR">
+<meta property="og:description" content="这里以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-02T03:47:14.724Z">
+<meta property="og:image" content="http://blog.shenke.store/assets/surf-the-internet-scientifically/router.png">
+<meta property="og:image" content="http://blog.shenke.store/assets/surf-the-internet-scientifically/speed.png">
+<meta property="og:updated_time" content="2019-11-02T10:48:57.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="科学上网">
-<meta name="twitter:description" content="这里都是以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR">
+<meta name="twitter:description" content="这里以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.s">
+<meta name="twitter:image" content="http://blog.shenke.store/assets/surf-the-internet-scientifically/router.png">
   
   
     <link rel="icon" href="http://data.shenke.codes/shenke/shenke_circle_small.png">
@@ -165,7 +168,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这里都是以 Centos 7 为例</p>
+        <p>这里以 Centos 7 为例</p>
 <h3 id="ShadowsocksR"><a href="#ShadowsocksR" class="headerlink" title="ShadowsocksR"></a>ShadowsocksR</h3><p>感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; chmod +x shadowsocksR.sh</span><br><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</span><br></pre></td></tr></table></figure>
 
@@ -181,6 +184,26 @@
 <blockquote>
 <p>第一步是获得 root 权限，第二、三步是安装 v2ray，选其一即可，第三步是安装 bbr 加速，如果无法安装就先 <strong>yum -y install wget</strong>。</p>
 </blockquote>
+<h3 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h3><p>评测的标准有很多，延迟、硬盘 IO、下载速度、路由线路等，这里放几个网站和脚本。</p>
+<h5 id="测速网站及软件"><a href="#测速网站及软件" class="headerlink" title="测速网站及软件"></a>测速网站及软件</h5><ol>
+<li>站长工具：<a href="http://tool.chinaz.com/" target="_blank" rel="noopener">http://tool.chinaz.com/</a></li>
+<li>IPIP：<a href="https://www.ipip.net/" target="_blank" rel="noopener">https://www.ipip.net/</a></li>
+<li>Best Trace 路由跟踪：<a href="https://cdn.ipip.net/17mon/besttrace.exe" target="_blank" rel="noopener">点击下载</a></li>
+</ol>
+<h5 id="测试脚本"><a href="#测试脚本" class="headerlink" title="测试脚本"></a>测试脚本</h5><p>这里推荐 teddySun 的测试脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lso- bench.sh | bash</span><br></pre></td></tr></table></figure>
+
+<h5 id="这里放一下我的-vps-的测评结果"><a href="#这里放一下我的-vps-的测评结果" class="headerlink" title="这里放一下我的 vps 的测评结果"></a>这里放一下我的 vps 的测评结果</h5><blockquote>
+<p>VPS：BandwagonHost 10G KVM - PROMO（年付 19.99 刀套餐，DC8 CN2 线路）</p>
+</blockquote>
+<p align="center" width="60%">
+    <img src="/assets/surf-the-internet-scientifically/router.png">
+</p>
+
+<p align="center" width="60%">
+    <img src="/assets/surf-the-internet-scientifically/speed.png">
+</p>
+
 <p>前人栽树后人乘凉，致敬隐退的大佬。</p>
 
       
@@ -376,6 +399,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -385,10 +412,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
