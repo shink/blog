@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://blog.shenke.codes">
-  <title>记录整数反转的溢出问题 | 深刻的博客</title>
+  <title>开启WordPress之旅 | 深刻的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
-<meta name="keywords" content="算法,Java,LeetCode">
+  <meta name="description" content="之前在 Shadowrocket 的电报群里看到有人分享了一个小火箭去广告的配置脚本，今天去 GitHub 上一看发现作者居然是西电的学长！之前就看到好多武大、重邮、东南的大佬的作品，用的 hexo 主题模版还是一个华科大佬写的，感觉他们在求学生涯里都能如此优秀，突然好后悔本科没有让自己 geek 起来，现在看到一个大佬是自己学校的就感到莫名的兴奋。 之前有想建一个自己的博客，先是用了 hexo，">
+<meta name="keywords" content="随笔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录整数反转的溢出问题">
-<meta property="og:url" content="https://blog.shenke.codes/2019/10/07/reverse-integer/index.html">
+<meta property="og:title" content="开启WordPress之旅">
+<meta property="og:url" content="https://blog.shenke.codes/2019/11/08/open-the-wordpress-tour/index.html">
 <meta property="og:site_name" content="深刻的博客">
-<meta property="og:description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
+<meta property="og:description" content="之前在 Shadowrocket 的电报群里看到有人分享了一个小火箭去广告的配置脚本，今天去 GitHub 上一看发现作者居然是西电的学长！之前就看到好多武大、重邮、东南的大佬的作品，用的 hexo 主题模版还是一个华科大佬写的，感觉他们在求学生涯里都能如此优秀，突然好后悔本科没有让自己 geek 起来，现在看到一个大佬是自己学校的就感到莫名的兴奋。 之前有想建一个自己的博客，先是用了 hexo，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/reverseinteger.png">
-<meta property="og:updated_time" content="2019-11-18T10:45:21.038Z">
+<meta property="og:updated_time" content="2019-11-18T10:59:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记录整数反转的溢出问题">
-<meta name="twitter:description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/reverseinteger.png">
+<meta name="twitter:title" content="开启WordPress之旅">
+<meta name="twitter:description" content="之前在 Shadowrocket 的电报群里看到有人分享了一个小火箭去广告的配置脚本，今天去 GitHub 上一看发现作者居然是西电的学长！之前就看到好多武大、重邮、东南的大佬的作品，用的 hexo 主题模版还是一个华科大佬写的，感觉他们在求学生涯里都能如此优秀，突然好后悔本科没有让自己 geek 起来，现在看到一个大佬是自己学校的就感到莫名的兴奋。 之前有想建一个自己的博客，先是用了 hexo，">
   
   
     <link rel="icon" href="https://data.shenke.codes/shenke/shenke_circle_small.png">
@@ -146,47 +144,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="article-reverse-integer" class="article article-type-article " itemscope itemprop="blogPost">
+            <article id="article-open-the-wordpress-tour" class="article article-type-article " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      记录整数反转的溢出问题
+      开启WordPress之旅
     </h1>
   
 
 
         
-        <a href="/2019/10/07/reverse-integer/" class="archive-article-date">
-  	<time datetime="2019-10-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
+        <a href="/2019/11/08/open-the-wordpress-tour/" class="archive-article-date">
+  	<time datetime="2019-11-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Record-Leetcode-simple-problem-Reverse-Integer"><a href="#Record-Leetcode-simple-problem-Reverse-Integer" class="headerlink" title="Record Leetcode simple problem: Reverse Integer"></a>Record Leetcode simple problem: Reverse Integer</h2><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。<strong>注意</strong>：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.<em><code>MIN_VALUE</code></em>, Integer.<em><code>MAX_VALUE</code></em>]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
-<a id="more"></a>
-
-<h2 id="Thought"><a href="#Thought" class="headerlink" title="Thought"></a>Thought</h2><p>先不考虑溢出问题，对整数取反很简单，先把 x 不断对 10 取余，然后 result 乘 10 加上余数覆盖掉原来的 result，最后 x /= 10。</p>
-<p>对于溢出问题，就需要判断最终得到的 result 的范围是否合法，而问题是如果 result 已经溢出，那么 result 就不能是 int 类型，要扩充一下的它的存储空间，让它表示比 int 还要大的数，那么它的类型就必须是 long（_我没想到这点，提交了三遍都不对，最后看了评论才悟出来…_）。</p>
-<p>另外，官方给出的答案有点复杂的味道：</p>
-<p align="center" width="600">
-    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/reverseinteger.png">
-</p>
-
+        <p>之前在 Shadowrocket 的电报群里看到有人分享了一个小火箭去广告的配置脚本，今天去 GitHub 上一看发现作者居然是西电的学长！之前就看到好多武大、重邮、东南的大佬的作品，用的 hexo 主题模版还是一个华科大佬写的，感觉他们在求学生涯里都能如此优秀，突然好后悔本科没有让自己 geek 起来，现在看到一个大佬是自己学校的就感到莫名的兴奋。</p>
+<p>之前有想建一个自己的博客，先是用了 hexo，把内容都放到了 GitHub 上，不过访问速度有点慢，而且没找到好看的主题，打算寒假的时候搞一搞 wordpress，顺便把吃灰的服务器利用起来，现在先来占个坑 :D。</p>
 <blockquote>
-<p>图源来自 Leetcode 官方答案，链接：<a href="https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/</a></p>
-</blockquote>
-<p>其实个人感觉这才是最稳妥最万能的做法，因为如果按刚才的做法，用一个 long 类型来保存结果，那如果题目改成是对 long 类型的数进行取反呢，再去用 long long 类型保存结果吗，不过对于这个题目来说这确实是最巧妙的解法了。</p>
-<h2 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 用long类型判断溢出</span></span><br><span class="line">		<span class="keyword">long</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (x != <span class="number">0</span>) &#123;</span><br><span class="line">			result = result * <span class="number">10</span> + x % <span class="number">10</span>;</span><br><span class="line">			x /= <span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> (<span class="keyword">int</span>) ((result &gt;= Integer.MIN_VALUE &amp;&amp; result &lt;= Integer.MAX_VALUE) ? result : <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.Integer.MIN_VALUE(-2^31)： -2147483648</span><br><span class="line"></span><br><span class="line">  Integer.MAX_VALUE(2^31-1)： 2147483647</span><br><span class="line"></span><br><span class="line">2️.函数 Math.pow(a, b)，返回的是 a 的 b 次方，类型是 Double。</span><br><span class="line"></span><br><span class="line">  a ^ b得到的也是a的b次方，但是返回的是Integer类型。</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>原文链接：<a href="https://blog.csdn.net/qq_38105251/article/details/102309986" target="_blank" rel="noopener">https://blog.csdn.net/qq_38105251/article/details/102309986</a></p>
+<p>原文链接：<a href="https://profound1y.wordpress.com/2019/11/08/beginning/" target="_blank" rel="noopener">https://profound1y.wordpress.com/2019/11/08/beginning/</a></p>
 </blockquote>
 
       
@@ -211,15 +193,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -235,6 +209,17 @@
       <!-- 添加完成 -->
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/essay//" class="article-tag-list-link color1">essay</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -247,18 +232,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/07/build-heap/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/17/random-code/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java建立大顶堆
+          微信小程序：生成随机且不重复字符
         
       </div>
     </a>
   
   
-    <a href="/2019/10/04/virmach/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">VirMach</div>
+    <a href="/2019/11/02/surf-the-internet-scientifically/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">科学上网</div>
       <i class="icon-circle-right"></i>
     </a>
   

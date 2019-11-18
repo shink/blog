@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="深刻的博客">
 <meta property="og:description" content="Thought第一步，产生一个随机 code 第二步，从数据库中查询这个 code 第三步，判断，若已存在则退回第一步，若不存在则返回这个 code  不难发现这是一个递归的过程，而跳出递归的条件就是中途出错或者已经找到不重复的 code。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-17T14:05:39.718Z">
+<meta property="og:updated_time" content="2019-11-18T10:44:09.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信小程序：生成随机且不重复字符">
 <meta name="twitter:description" content="Thought第一步，产生一个随机 code 第二步，从数据库中查询这个 code 第三步，判断，若已存在则退回第一步，若不存在则返回这个 code  不难发现这是一个递归的过程，而跳出递归的条件就是中途出错或者已经找到不重复的 code。">
@@ -165,7 +165,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Thought"><a href="#Thought" class="headerlink" title="Thought"></a>Thought</h3><p>第一步，产生一个随机 code</p>
+        <h2 id="Thought"><a href="#Thought" class="headerlink" title="Thought"></a>Thought</h2><p>第一步，产生一个随机 code</p>
 <p>第二步，从数据库中查询这个 code</p>
 <p>第三步，判断，若已存在则退回第一步，若不存在则返回这个 code</p>
 <blockquote>
@@ -173,12 +173,15 @@
 </blockquote>
 <a id="more"></a>
 
-<h3 id="Promise-Style"><a href="#Promise-Style" class="headerlink" title="Promise Style"></a>Promise Style</h3><p>fileUtil.js 中</p>
+<h2 id="Promise-Style"><a href="#Promise-Style" class="headerlink" title="Promise Style"></a>Promise Style</h2><p>fileUtil.js 中</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 产生一个不重复的code</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateCode</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> code = getRandomCode();</span><br><span class="line"></span><br><span class="line">    queryCode(code).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (res[<span class="number">0</span>]) &#123;</span><br><span class="line">        <span class="comment">//  需要结束</span></span><br><span class="line">        resolve(res[<span class="number">1</span>]);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//  重复，不能结束，进行递归</span></span><br><span class="line">        <span class="keyword">return</span> generateCode();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 产生四位数字+字母随机字符</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomCode</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> code = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">const</span> array = [<span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, </span><br><span class="line">  <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>, <span class="string">'u'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>, </span><br><span class="line">  <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>, <span class="string">'G'</span>, <span class="string">'H'</span>, <span class="string">'I'</span>, <span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'L'</span>, <span class="string">'M'</span>, <span class="string">'N'</span>, <span class="string">'O'</span>, </span><br><span class="line">  <span class="string">'P'</span>, <span class="string">'Q'</span>, <span class="string">'R'</span>, <span class="string">'S'</span>, <span class="string">'T'</span>, <span class="string">'U'</span>, <span class="string">'V'</span>, <span class="string">'W'</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Z'</span>];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> id = <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">61</span>);</span><br><span class="line">    code += array[id];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> code;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从云数据库中查询code</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queryCode</span>(<span class="params">code</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//  result[0] 代表是否需要结束，true：需要结束，false：不需要结束</span></span><br><span class="line">    <span class="keyword">var</span> result = [<span class="literal">false</span>, <span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">    wx.cloud.callFunction(&#123;</span><br><span class="line">      name: <span class="string">"query-code"</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">        code: code</span><br><span class="line">      &#125;,</span><br><span class="line">      success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> data = res.result.data;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (data.length === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="comment">//  查询成功，code未重复</span></span><br><span class="line">          result = [<span class="literal">true</span>, code];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//  查询成功，code重复,则继续生成code并判断</span></span><br><span class="line">          result[<span class="number">0</span>] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      fail: <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//  查询失败</span></span><br><span class="line">        result[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      complete: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(result);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><p>detail.js 中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fileUtil.generateUrl(<span class="keyword">this</span>.data.fileID).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><p>detail.js 中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fileUtil.generateCode().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>原文链接：<a href="https://blog.csdn.net/qq_38105251/article/details/103113050" target="_blank" rel="noopener">https://blog.csdn.net/qq_38105251/article/details/103113050</a></p>
+</blockquote>
 
       
 
@@ -235,8 +238,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2019/11/02/surf-the-internet-scientifically/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">科学上网</div>
+    <a href="/2019/11/08/open-the-wordpress-tour/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开启WordPress之旅</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -373,14 +376,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -393,11 +388,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">

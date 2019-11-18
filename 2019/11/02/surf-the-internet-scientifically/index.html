@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog.shenke.codes/assets/surf-the-internet-scientifically/router.png">
 <meta property="og:image" content="https://blog.shenke.codes/assets/surf-the-internet-scientifically/speed.png">
-<meta property="og:updated_time" content="2019-11-02T10:48:57.840Z">
+<meta property="og:updated_time" content="2019-11-18T10:46:02.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="科学上网">
 <meta name="twitter:description" content="这里以 Centos 7 为例 ShadowsocksR感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。 123sudo -iwget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.s">
@@ -169,7 +169,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>这里以 Centos 7 为例</p>
-<h3 id="ShadowsocksR"><a href="#ShadowsocksR" class="headerlink" title="ShadowsocksR"></a>ShadowsocksR</h3><p>感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。</p>
+<h2 id="ShadowsocksR"><a href="#ShadowsocksR" class="headerlink" title="ShadowsocksR"></a>ShadowsocksR</h2><p>感觉 SSR 正在慢慢被 V2ray 取代，这里就不多说了，直接上 teddySun 的一键脚本。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; chmod +x shadowsocksR.sh</span><br><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -184,16 +184,16 @@
 <blockquote>
 <p>第一步是获得 root 权限，第二、三步是安装 v2ray，选其一即可，第三步是安装 bbr 加速，如果无法安装就先 <strong>yum -y install wget</strong>。</p>
 </blockquote>
-<h3 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h3><p>评测的标准有很多，延迟、硬盘 IO、下载速度、路由线路等，这里放几个网站和脚本。</p>
-<h5 id="测速网站及软件"><a href="#测速网站及软件" class="headerlink" title="测速网站及软件"></a>测速网站及软件</h5><ol>
+<h2 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h2><p>评测的标准有很多，延迟、硬盘 IO、下载速度、路由线路等，这里放几个网站和脚本。</p>
+<h4 id="测速网站及软件"><a href="#测速网站及软件" class="headerlink" title="测速网站及软件"></a>测速网站及软件</h4><ol>
 <li>站长工具：<a href="http://tool.chinaz.com/" target="_blank" rel="noopener">http://tool.chinaz.com/</a></li>
 <li>IPIP：<a href="https://www.ipip.net/" target="_blank" rel="noopener">https://www.ipip.net/</a></li>
 <li>Best Trace 路由跟踪：<a href="https://cdn.ipip.net/17mon/besttrace.exe" target="_blank" rel="noopener">点击下载</a></li>
 </ol>
-<h5 id="测试脚本"><a href="#测试脚本" class="headerlink" title="测试脚本"></a>测试脚本</h5><p>这里推荐 teddySun 的测试脚本</p>
+<h4 id="测试脚本"><a href="#测试脚本" class="headerlink" title="测试脚本"></a>测试脚本</h4><p>这里推荐 teddySun 的测试脚本</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lso- bench.sh | bash</span><br></pre></td></tr></table></figure>
 
-<h5 id="这里放一下我的-vps-的测评结果"><a href="#这里放一下我的-vps-的测评结果" class="headerlink" title="这里放一下我的 vps 的测评结果"></a>这里放一下我的 vps 的测评结果</h5><blockquote>
+<h4 id="这里放一下我的-vps-的测评结果"><a href="#这里放一下我的-vps-的测评结果" class="headerlink" title="这里放一下我的 vps 的测评结果"></a>这里放一下我的 vps 的测评结果</h4><blockquote>
 <p>VPS：BandwagonHost 10G KVM - PROMO（年付 19.99 刀套餐，DC8 CN2 线路）</p>
 </blockquote>
 <p align="center" width="60%">
@@ -256,11 +256,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/17/random-code/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/08/open-the-wordpress-tour/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          微信小程序：生成随机且不重复字符
+          开启WordPress之旅
         
       </div>
     </a>
@@ -404,14 +404,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -424,11 +416,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
