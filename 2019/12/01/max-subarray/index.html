@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://blog.shenke.codes">
-  <title>Tag: 算法 | 深刻的博客</title>
+  <title>Java求最大子数组 | 深刻的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="深刻的博客">
-<meta property="og:url" content="https://blog.shenke.codes/tags/算法/index.html">
+  <meta name="description" content="Background在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。">
+<meta name="keywords" content="算法,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java求最大子数组">
+<meta property="og:url" content="https://blog.shenke.codes/2019/12/01/max-subarray/index.html">
 <meta property="og:site_name" content="深刻的博客">
+<meta property="og:description" content="Background在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray-background.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/cross.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray-example.png">
+<meta property="og:updated_time" content="2019-12-01T08:42:36.027Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深刻的博客">
+<meta name="twitter:title" content="Java求最大子数组">
+<meta name="twitter:description" content="Background在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray-background.png">
   
   
     <link rel="icon" href="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke_circle_small.png">
@@ -139,36 +149,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="article-max-subarray" class="article article-type-article " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java求最大子数组
+    </h1>
+  
+
+
+        
+        <a href="/2019/12/01/max-subarray/" class="archive-article-date">
+  	<time datetime="2019-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。</p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray-background.png" width="70%">
+</p>
+
+<a id="more"></a>
+
+<h2 id="Thought"><a href="#Thought" class="headerlink" title="Thought"></a>Thought</h2><p>我们都知道 <code>利润 = 售价 - 成本</code>，即两者之差越大则利润越大。要求利润的最大值，不妨先计算出当天与前一天股价的差，得到的股价浮动数组，然后找其最大子数组，即为原问题的解。</p>
+<p>对于最大子数组，最简单粗暴的方法就是两层 for，遍历所有子数组后，自然能求出最大子数组。</p>
+<p>更好的解决办法是用<strong>分治策略</strong>。将原问题分解为两个子问题 left 和 right，设跨过两个子问题中点的数组为 cross，比较 left、right 和 cross 的最大值即为原问题的最优解。</p>
+<h2 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxSubarray</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] variation;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MaxSubarray</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">		variation = <span class="keyword">new</span> <span class="keyword">int</span>[array.length - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">			variation[i] = array[i + <span class="number">1</span>] - array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  暴力法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bruteForce</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> end = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; variation.length; ++i) &#123;</span><br><span class="line">			<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; variation.length; ++j) &#123;</span><br><span class="line">				temp += variation[j];</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (temp &gt; sum) &#123;</span><br><span class="line">					sum = temp;</span><br><span class="line">					start = i;</span><br><span class="line">					end = j;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"maxPrice： "</span> + sum + <span class="string">"，index： ["</span> + start + <span class="string">", "</span> + end + <span class="string">"]"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Divide-and-Conquer"><a href="#Divide-and-Conquer" class="headerlink" title="Divide and Conquer"></a>Divide and Conquer</h2><ul>
+<li>Divide: Divide the array A[low..high] into two subarrays of n/2 elements, A[low..mid] and A[mid+1..high].</li>
+<li>Conquer: Find the maximum subarray recursively.</li>
+<li>Combine: Select a subarray with the largest sum of the sub-problems’.</li>
+</ul>
+<h2 id="Pseudo-Code"><a href="#Pseudo-Code" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h2><p align="center">
+    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray.png" width="80%">
+</p>
+
+<br>
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/cross.png" width="80%">
+</p>
+
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p align="center">
+    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/max-subarray-example.png" width="80%">
+</p>
+
+<h2 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxSubarray</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] variation;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MaxSubarray</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">		variation = <span class="keyword">new</span> <span class="keyword">int</span>[array.length - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">			variation[i] = array[i + <span class="number">1</span>] - array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divideConquer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> divideConquer(variation, <span class="number">0</span>, variation.length - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">divideConquer</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">			<span class="keyword">return</span> array[left];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">			<span class="keyword">int</span> left_sum = divideConquer(array, left, mid);</span><br><span class="line">			<span class="keyword">int</span> right_sum = divideConquer(array, mid + <span class="number">1</span>, right);</span><br><span class="line">			<span class="keyword">int</span> cross_sum = crossing(array, left, mid, right);</span><br><span class="line"></span><br><span class="line"><span class="comment">//			比较三者最大值</span></span><br><span class="line">			<span class="keyword">return</span> left_sum &gt; cross_sum ? (left_sum &gt; right_sum ? left_sum : right_sum)</span><br><span class="line">					: (cross_sum &gt; right_sum ? cross_sum : right_sum);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	求cross</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">crossing</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp_left = -<span class="number">99999</span>;</span><br><span class="line">		<span class="keyword">int</span> temp_right = -<span class="number">99999</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		从mid向前求最大值</span></span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = mid; i &gt;= left; --i) &#123;</span><br><span class="line">			sum += array[i];</span><br><span class="line">			<span class="keyword">if</span> (sum &gt; temp_left) &#123;</span><br><span class="line">				temp_left = sum;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		从mid+1向后求最大值</span></span><br><span class="line">		sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = mid + <span class="number">1</span>; j &lt; right; ++j) &#123;</span><br><span class="line">			sum += array[j];</span><br><span class="line">			<span class="keyword">if</span> (sum &gt; temp_right) &#123;</span><br><span class="line">				temp_right = sum;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> temp_left + temp_right;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] array = &#123; <span class="number">100</span>, <span class="number">113</span>, <span class="number">110</span>, <span class="number">85</span>, <span class="number">105</span>, <span class="number">102</span>, <span class="number">86</span>, <span class="number">63</span>, <span class="number">81</span>, <span class="number">101</span>, <span class="number">94</span>, <span class="number">106</span>, <span class="number">101</span>, <span class="number">79</span>, <span class="number">94</span>, <span class="number">90</span>, <span class="number">97</span> &#125;;</span><br><span class="line">		MaxSubarray maxSubarray = <span class="keyword">new</span> MaxSubarray(array);</span><br><span class="line">		maxSubarray.bruteForce();</span><br><span class="line">		System.out.println(<span class="string">"分治："</span> + maxSubarray.divideConquer());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2><ul>
+<li><p>暴力法：O(n^2)</p>
+</li>
+<li><p>分治法：<code>T(n) = 2\*T(n/2) = 4\*T(n/4) = …… = n\*T(1)</code><br><br>每一层代价都是 n，一共有 logn 层，故时间复杂度为 O(nlogn)</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+
+    <!-- 添加本文结束标记-->
+    <!-- 
+      <div style="text-align:center;color: #000;font-size:16px;font-weight: bolder;">
+        -------------<i class="fa fa-paw">Thank you for reading</i>-------------
+        </div>
+     -->
+    <!-- 添加完成 -->
+    <!-- <br /> -->
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/01/max-subarray/" class="archive-article-date">
-  	<time datetime="2019-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/01/max-subarray/">Java求最大子数组</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,191 +244,64 @@
 		</ul>
 	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <!-- 开始添加阅读量-->
+      
+        <span id="busuanzi_container_page_pv" style="color: #C0C0C0;">
+          |  阅读 <span id="busuanzi_value_page_pv"></span> 
+        </span>
+      
+      <!-- 添加完成 -->
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/01/merge-sort/" class="archive-article-date">
-  	<time datetime="2019-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/01/merge-sort/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java分治策略实现归并排序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/01/merge-sort/">Java分治策略实现归并排序</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/01/quick-sort/" class="archive-article-date">
-  	<time datetime="2019-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/01/quick-sort/">Java分治策略实现快速排序</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/build-heap/" class="archive-article-date">
-  	<time datetime="2019-10-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/build-heap/">Java建立大顶堆</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/reverse-integer/" class="archive-article-date">
-  	<time datetime="2019-10-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/reverse-integer/">记录整数反转的溢出问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -404,9 +337,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
