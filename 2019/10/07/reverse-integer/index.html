@@ -17,14 +17,14 @@
 <meta property="og:description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/reverseinteger.png">
-<meta property="og:updated_time" content="2019-11-18T10:45:21.038Z">
+<meta property="og:updated_time" content="2019-12-01T05:16:49.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录整数反转的溢出问题">
 <meta name="twitter:description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/reverseinteger.png">
   
   
-    <link rel="icon" href="https://data.shenke.codes/shenke/shenke_circle_small.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke_circle_small.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.css">
   <style type="text/css">
@@ -49,7 +49,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://data.shenke.codes/shenke/shenke.jpg" class="js-avatar">
+			<img src="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">深刻</a></h1>
@@ -101,7 +101,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://data.shenke.codes/shenke/shenke.jpg" class="js-avatar">
+				<img src="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">深刻</h1>
@@ -178,7 +178,7 @@
 </p>
 
 <blockquote>
-<p>图源来自 Leetcode 官方答案，链接：<a href="https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/</a></p>
+<p>图片来自 Leetcode 官方答案，链接：<a href="https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/</a></p>
 </blockquote>
 <p>其实个人感觉这才是最稳妥最万能的做法，因为如果按刚才的做法，用一个 long 类型来保存结果，那如果题目改成是对 long 类型的数进行取反呢，再去用 long long 类型保存结果吗，不过对于这个题目来说这确实是最巧妙的解法了。</p>
 <h2 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 用long类型判断溢出</span></span><br><span class="line">		<span class="keyword">long</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (x != <span class="number">0</span>) &#123;</span><br><span class="line">			result = result * <span class="number">10</span> + x % <span class="number">10</span>;</span><br><span class="line">			x /= <span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> (<span class="keyword">int</span>) ((result &gt;= Integer.MIN_VALUE &amp;&amp; result &lt;= Integer.MAX_VALUE) ? result : <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
@@ -395,15 +395,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -415,15 +415,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
               </li>
             
             <div class="clearfix"></div>

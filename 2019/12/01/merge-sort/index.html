@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://blog.shenke.codes">
-  <title>Tag: 算法 | 深刻的博客</title>
+  <title>Java分治策略实现归并排序 | 深刻的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="深刻的博客">
-<meta property="og:url" content="https://blog.shenke.codes/tags/算法/index.html">
+  <meta name="description" content="Thought能不能使用分治策略的关键是 子问题的最优解是否可以通过某种手段得到原问题的最优解。对于归并排序，将两个已经有序的子问题序列进行合并，就可得到一个有序序列，以此类推，最终可将所有子问题序列合并成一个有序序列，而得到的有序序列就是最终答案。          图片来自简书，链接：https://www.cnblogs.com/chengxiao/p/6194356.html">
+<meta name="keywords" content="算法,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java分治策略实现归并排序">
+<meta property="og:url" content="https://blog.shenke.codes/2019/12/01/merge-sort/index.html">
 <meta property="og:site_name" content="深刻的博客">
+<meta property="og:description" content="Thought能不能使用分治策略的关键是 子问题的最优解是否可以通过某种手段得到原问题的最优解。对于归并排序，将两个已经有序的子问题序列进行合并，就可得到一个有序序列，以此类推，最终可将所有子问题序列合并成一个有序序列，而得到的有序序列就是最终答案。          图片来自简书，链接：https://www.cnblogs.com/chengxiao/p/6194356.html">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/mergesort.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/merge.png">
+<meta property="og:updated_time" content="2019-12-01T05:16:37.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深刻的博客">
+<meta name="twitter:title" content="Java分治策略实现归并排序">
+<meta name="twitter:description" content="Thought能不能使用分治策略的关键是 子问题的最优解是否可以通过某种手段得到原问题的最优解。对于归并排序，将两个已经有序的子问题序列进行合并，就可得到一个有序序列，以此类推，最终可将所有子问题序列合并成一个有序序列，而得到的有序序列就是最终答案。          图片来自简书，链接：https://www.cnblogs.com/chengxiao/p/6194356.html">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/mergesort.png">
   
   
     <link rel="icon" href="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke_circle_small.png">
@@ -139,36 +147,69 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="article-merge-sort" class="article article-type-article " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Java分治策略实现归并排序
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/01/merge-sort/" class="archive-article-date">
+
+
+        
+        <a href="/2019/12/01/merge-sort/" class="archive-article-date">
   	<time datetime="2019-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/01/merge-sort/">Java分治策略实现归并排序</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Thought"><a href="#Thought" class="headerlink" title="Thought"></a>Thought</h2><p>能不能使用分治策略的关键是 <strong>子问题的最优解是否可以通过某种手段得到原问题的最优解</strong>。对于归并排序，将两个已经有序的子问题序列进行合并，就可得到一个有序序列，以此类推，最终可将所有子问题序列合并成一个有序序列，而得到的有序序列就是最终答案。</p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/mergesort.png" width="80%">
+</p>
 
-        <div class="article-info info-on-right">
-          
+<blockquote>
+<p>图片来自简书，链接：<a href="https://www.cnblogs.com/chengxiao/p/6194356.html" target="_blank" rel="noopener">https://www.cnblogs.com/chengxiao/p/6194356.html</a></p>
+</blockquote>
+<a id="more"></a>
+
+<p>至于如何合并，直接想到的就是开辟一个新空间，拿这两个子问题序列元素一一比对，将元素有序放到新空间里。</p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/merge.png" width="80%">
+</p>
+
+<blockquote>
+<p>图片来自简书，链接：<a href="https://www.cnblogs.com/chengxiao/p/6194356.html" target="_blank" rel="noopener">https://www.cnblogs.com/chengxiao/p/6194356.html</a></p>
+</blockquote>
+<h2 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeSort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MergeSort</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">double</span>[] array)</span> </span>&#123;</span><br><span class="line"><span class="comment">//		开辟一个临时数组，避免在递归中频繁开辟空间</span></span><br><span class="line">		<span class="keyword">double</span>[] result = <span class="keyword">new</span> <span class="keyword">double</span>[array.length];</span><br><span class="line">		mergeSort(array, <span class="number">0</span>, array.length - <span class="number">1</span>, result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">double</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">double</span>[] result)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">			<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">			mergeSort(array, left, mid, result);</span><br><span class="line">			mergeSort(array, mid + <span class="number">1</span>, right, result);</span><br><span class="line"></span><br><span class="line"><span class="comment">//			将两个子问题序列合并</span></span><br><span class="line">			merge(array, left, mid, right, result);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">double</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right, <span class="keyword">double</span>[] result)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = left;</span><br><span class="line">		<span class="keyword">int</span> j = mid + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= right) &#123;</span><br><span class="line">			<span class="keyword">if</span> (array[i] &gt;= array[j]) &#123;</span><br><span class="line">				result[k++] = array[j++];</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				result[k++] = array[i++];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		将剩余的左子问题序列填充到result中</span></span><br><span class="line">		<span class="keyword">while</span> (i &lt;= mid) &#123;</span><br><span class="line">			result[k++] = array[i++];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		将剩余的右子问题序列填充到result中</span></span><br><span class="line">		<span class="keyword">while</span> (j &lt;= right) &#123;</span><br><span class="line">			result[k++] = array[j++];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		将result中元素填充到原序列中，以便继续排序</span></span><br><span class="line">		i = left;</span><br><span class="line">		k = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (i &lt;= right) &#123;</span><br><span class="line">			array[i++] = result[k++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//  随机产生double数组</span></span><br><span class="line">    <span class="keyword">int</span> length = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">long</span> start, end;</span><br><span class="line">	<span class="keyword">double</span>[] array = <span class="keyword">new</span> <span class="keyword">double</span>[length];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">double</span> num = Math.random() * <span class="number">10</span>;</span><br><span class="line"><span class="comment">//      将double值精确到小数点后两位</span></span><br><span class="line">        num = <span class="keyword">new</span> BigDecimal(num).setScale(<span class="number">2</span>, BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">        array[i] = num;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(Arrays.toString(array));</span><br><span class="line"></span><br><span class="line"><span class="comment">//	归并排序开始</span></span><br><span class="line">    start = System.currentTimeMillis(); <span class="comment">// 获取开始时间</span></span><br><span class="line"></span><br><span class="line">    MergeSort mergeSort = <span class="keyword">new</span> MergeSort();</span><br><span class="line">    mergeSort.mergeSort(array);</span><br><span class="line"></span><br><span class="line">    end = System.currentTimeMillis(); <span class="comment">// 获取结束时间</span></span><br><span class="line">    System.out.println(<span class="string">"归并排序运行时间： "</span> + (end - start) + <span class="string">"ms"</span>);</span><br><span class="line">    System.out.println(Arrays.toString(array));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2><p>T(n) = 2*T(n/2) = 4*T(n/4) = …… = n*T(1)</p>
+<p>每一层代价都是 n，一共有 logn 层，故时间复杂度为 O(nlogn)</p>
+
+      
+
+      
+    </div>
+
+    <!-- 添加本文结束标记-->
+    <!-- 
+      <div style="text-align:center;color: #000;font-size:16px;font-weight: bolder;">
+        -------------<i class="fa fa-paw">Thank you for reading</i>-------------
+        </div>
+     -->
+    <!-- 添加完成 -->
+    <!-- <br /> -->
+    
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,107 +225,64 @@
 		</ul>
 	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <!-- 开始添加阅读量-->
+      
+        <span id="busuanzi_container_page_pv" style="color: #C0C0C0;">
+          |  阅读 <span id="busuanzi_value_page_pv"></span> 
+        </span>
+      
+      <!-- 添加完成 -->
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/build-heap/" class="archive-article-date">
-  	<time datetime="2019-10-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/17/random-code/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信小程序：生成随机且不重复字符</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/build-heap/">Java建立大顶堆</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-article">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/reverse-integer/" class="archive-article-date">
-  	<time datetime="2019-10-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/reverse-integer/">记录整数反转的溢出问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -320,9 +318,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
