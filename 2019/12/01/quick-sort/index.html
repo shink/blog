@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="深刻的博客">
 <meta property="og:description" content="Thought Divide: Partition the array into two subarrays around a pivot x such that elements in lower subarray ≤ x ≤ elements in upper subarray. Conquer: Recursively sort the subarrays. Combine: Trivial">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/quicksort.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/partition.png">
-<meta property="og:updated_time" content="2019-12-01T06:21:34.394Z">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/quicksort.png">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/partition.png">
+<meta property="og:updated_time" content="2019-12-11T02:29:08.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java分治策略实现快速排序">
 <meta name="twitter:description" content="Thought Divide: Partition the array into two subarrays around a pivot x such that elements in lower subarray ≤ x ≤ elements in upper subarray. Conquer: Recursively sort the subarrays. Combine: Trivial">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/profoundly/data/master/blog/quicksort.png">
+<meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/blog/quicksort.png">
   
   
     <link rel="icon" href="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke_circle_small.png">
@@ -179,11 +179,11 @@
 <a id="more"></a>
 
 <h2 id="Pseudo-Code"><a href="#Pseudo-Code" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h2><p align="center">
-    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/quicksort.png" width="80%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/quicksort.png" width="80%">
 </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/profoundly/data/master/blog/partition.png" width="80%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/partition.png" width="80%">
 </p>
 
 <h2 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">double</span>[] array)</span> </span>&#123;</span><br><span class="line">		quickSort(array, <span class="number">0</span>, array.length - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">double</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line"><span class="comment">//			枢轴</span></span><br><span class="line">			<span class="keyword">int</span> pivot = partition(array, left, right);</span><br><span class="line">			quickSort(array, left, pivot - <span class="number">1</span>);</span><br><span class="line">			quickSort(array, pivot + <span class="number">1</span>, right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">double</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = left;</span><br><span class="line">		<span class="keyword">int</span> j = right;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; array[i] &lt;= array[j]) &#123;</span><br><span class="line">				j--;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">				<span class="keyword">double</span> temp = array[j];</span><br><span class="line">				array[j] = array[i];</span><br><span class="line">				array[i] = temp;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; array[i] &lt;= array[j]) &#123;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">				<span class="keyword">double</span> temp = array[j];</span><br><span class="line">				array[j] = array[i];</span><br><span class="line">				array[i] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> i;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -399,10 +399,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -412,6 +408,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
