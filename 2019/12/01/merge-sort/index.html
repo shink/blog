@@ -18,14 +18,14 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/mergesort.png">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/merge.png">
-<meta property="og:updated_time" content="2019-12-11T02:28:41.787Z">
+<meta property="og:updated_time" content="2019-12-12T02:09:23.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java分治策略实现归并排序">
 <meta name="twitter:description" content="Thought能不能使用分治策略的关键是 子问题的最优解是否可以通过某种手段得到原问题的最优解。对于归并排序，将两个已经有序的子问题序列进行合并，就可得到一个有序序列，以此类推，最终可将所有子问题序列合并成一个有序序列，而得到的有序序列就是最终答案。          图片来自简书，链接：https://www.cnblogs.com/chengxiao/p/6194356.html">
 <meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/blog/mergesort.png">
   
   
-    <link rel="icon" href="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke_circle_small.png">
+    <link rel="icon" href="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.css">
   <style type="text/css">
@@ -50,7 +50,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke.jpg" class="js-avatar">
+			<img src="https://gitee.com/profoundly/data/raw/master/shenke/shenke.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">深刻</a></h1>
@@ -102,7 +102,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://raw.githubusercontent.com/profoundly/data/master/shenke/shenke.jpg" class="js-avatar">
+				<img src="https://gitee.com/profoundly/data/raw/master/shenke/shenke.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">深刻</h1>
@@ -192,6 +192,9 @@
 
 <h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2><p>T(n) = 2*T(n/2) = 4*T(n/4) = …… = n*T(1)</p>
 <p>每一层代价都是 n，一共有 logn 层，故时间复杂度为 O(nlogn)</p>
+<blockquote>
+<p>原文链接：<a href="https://blog.csdn.net/qq_38105251/article/details/103334201" target="_blank" rel="noopener">https://blog.csdn.net/qq_38105251/article/details/103334201</a></p>
+</blockquote>
 
       
 
@@ -247,18 +250,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/01/max-subarray/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/01/quick-sort/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java求最大子数组
+          Java分治策略实现快速排序
         
       </div>
     </a>
   
   
-    <a href="/2019/12/01/quick-sort/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java分治策略实现快速排序</div>
+    <a href="/2019/11/17/random-code/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信小程序：生成随机且不重复字符</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -395,11 +398,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -407,7 +406,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,7 +485,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">西电在读研究生一枚&lt;br&gt;&lt;br&gt;一路是夜幕尘沙&lt;br&gt;&lt;br&gt;——深刻</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">西电在读研究生一枚&lt;br&gt;&lt;br&gt;一路是夜幕沉沙&lt;br&gt;&lt;br&gt;——深刻</div>
   	  	
     	</section>
     
