@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="深刻的博客">
 <meta property="og:description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/reverseinteger.png">
-<meta property="og:updated_time" content="2019-12-11T02:29:24.684Z">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/reverse-integer/reverse-integer.png">
+<meta property="og:updated_time" content="2019-12-21T14:08:26.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录整数反转的溢出问题">
 <meta name="twitter:description" content="Record Leetcode simple problem: Reverse Integer给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.MIN_VALUE, Integer.MAX_VALUE]。请根据这个假设，如果反转后整数溢出那么就返回 0。">
-<meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/blog/reverseinteger.png">
+<meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/blog/reverse-integer/reverse-integer.png">
   
   
     <link rel="icon" href="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
@@ -174,7 +174,7 @@
 <p>对于溢出问题，就需要判断最终得到的 result 的范围是否合法，而问题是如果 result 已经溢出，那么 result 就不能是 int 类型，要扩充一下的它的存储空间，让它表示比 int 还要大的数，那么它的类型就必须是 long（_我没想到这点，提交了三遍都不对，最后看了评论才悟出来…_）。</p>
 <p>另外，官方给出的答案有点复杂的味道：</p>
 <p align="center" width="600">
-    <img src="https://gitee.com/profoundly/data/raw/master/blog/reverseinteger.png">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/reverse-integer/reverse-integer.png">
 </p>
 
 <blockquote>
@@ -395,19 +395,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">

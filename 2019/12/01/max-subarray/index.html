@@ -16,15 +16,15 @@
 <meta property="og:site_name" content="深刻的博客">
 <meta property="og:description" content="Background在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray-background.png">
-<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray.png">
-<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cross.png">
-<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray-example.png">
-<meta property="og:updated_time" content="2019-12-12T02:08:40.431Z">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/background.png">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/max-subarray-code.png">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/cross-code.png">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/example.png">
+<meta property="og:updated_time" content="2019-12-21T14:04:37.923Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java求最大子数组">
 <meta name="twitter:description" content="Background在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。">
-<meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray-background.png">
+<meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/background.png">
   
   
     <link rel="icon" href="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
@@ -172,7 +172,7 @@
       
         <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>在某天购入股票后抛出，求如何取得最大利润。已知股票趋势如图所示。</p>
 <p align="center">
-    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray-background.png" width="70%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/background.png" width="70%">
 </p>
 
 <a id="more"></a>
@@ -188,17 +188,17 @@
 <li>Combine: Select a subarray with the largest sum of the sub-problems’.</li>
 </ul>
 <h2 id="Pseudo-Code"><a href="#Pseudo-Code" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h2><p align="center">
-    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray.png" width="80%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/max-subarray-code.png" width="80%">
 </p>
 
 <br>
 
 <p align="center">
-    <img src="https://gitee.com/profoundly/data/raw/master/blog/cross.png" width="80%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/cross-code.png" width="80%">
 </p>
 
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p align="center">
-    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray-example.png" width="80%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/max-subarray/example.png" width="80%">
 </p>
 
 <h2 id="Java-Codes"><a href="#Java-Codes" class="headerlink" title="Java Codes"></a>Java Codes</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxSubarray</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] variation;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MaxSubarray</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">		variation = <span class="keyword">new</span> <span class="keyword">int</span>[array.length - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">			variation[i] = array[i + <span class="number">1</span>] - array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divideConquer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> divideConquer(variation, <span class="number">0</span>, variation.length - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">divideConquer</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">			<span class="keyword">return</span> array[left];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">			<span class="keyword">int</span> left_sum = divideConquer(array, left, mid);</span><br><span class="line">			<span class="keyword">int</span> right_sum = divideConquer(array, mid + <span class="number">1</span>, right);</span><br><span class="line">			<span class="keyword">int</span> cross_sum = crossing(array, left, mid, right);</span><br><span class="line"></span><br><span class="line"><span class="comment">//			比较三者最大值</span></span><br><span class="line">			<span class="keyword">return</span> left_sum &gt; cross_sum ? (left_sum &gt; right_sum ? left_sum : right_sum)</span><br><span class="line">					: (cross_sum &gt; right_sum ? cross_sum : right_sum);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	求cross</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">crossing</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp_left = -<span class="number">99999</span>;</span><br><span class="line">		<span class="keyword">int</span> temp_right = -<span class="number">99999</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		从mid向前求最大值</span></span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = mid; i &gt;= left; --i) &#123;</span><br><span class="line">			sum += array[i];</span><br><span class="line">			<span class="keyword">if</span> (sum &gt; temp_left) &#123;</span><br><span class="line">				temp_left = sum;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		从mid+1向后求最大值</span></span><br><span class="line">		sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = mid + <span class="number">1</span>; j &lt; right; ++j) &#123;</span><br><span class="line">			sum += array[j];</span><br><span class="line">			<span class="keyword">if</span> (sum &gt; temp_right) &#123;</span><br><span class="line">				temp_right = sum;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> temp_left + temp_right;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -279,8 +279,8 @@
     </a>
   
   
-    <a href="/2019/12/01/quick-sort/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java分治策略实现快速排序</div>
+    <a href="/2019/12/01/merge-sort/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java分治策略实现归并排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -417,19 +417,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
