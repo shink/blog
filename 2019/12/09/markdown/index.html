@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="https://blog.shenke.codes">
   <title>Markdown 语法一揽子计划 | 深刻的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文链接 标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题">
+  <meta name="description" content="原文链接 Markdown 语法一揽子计划标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题  效果：  一级标题二级标题三级标题四级标题五级标题六级标题 区块引用使用 &amp;gt;表示引用  &amp;gt; 区块引用&amp;gt;&amp;gt; 嵌套引用  效果：  区块引用  嵌套引用   代码区块在每行加上 4 个空格或者一个">
 <meta name="keywords" content="Markdown">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown 语法一揽子计划">
 <meta property="og:url" content="https://blog.shenke.codes/2019/12/09/markdown/index.html">
 <meta property="og:site_name" content="深刻的博客">
-<meta property="og:description" content="原文链接 标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题">
+<meta property="og:description" content="原文链接 Markdown 语法一揽子计划标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题  效果：  一级标题二级标题三级标题四级标题五级标题六级标题 区块引用使用 &amp;gt;表示引用  &amp;gt; 区块引用&amp;gt;&amp;gt; 嵌套引用  效果：  区块引用  嵌套引用   代码区块在每行加上 4 个空格或者一个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-27T02:16:01.749Z">
+<meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
+<meta property="og:updated_time" content="2020-01-17T09:15:54.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown 语法一揽子计划">
-<meta name="twitter:description" content="原文链接 标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题">
+<meta name="twitter:description" content="原文链接 Markdown 语法一揽子计划标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题  效果：  一级标题二级标题三级标题四级标题五级标题六级标题 区块引用使用 &amp;gt;表示引用  &amp;gt; 区块引用&amp;gt;&amp;gt; 嵌套引用  效果：  区块引用  嵌套引用   代码区块在每行加上 4 个空格或者一个">
+<meta name="twitter:image" content="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
   
   
     <link rel="icon" href="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
@@ -166,12 +168,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><a href="https://blog.csdn.net/qq_38105251/article/details/103463608" title="原文链接" target="_blank" rel="noopener">原文链接</a></p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 <code>#</code>表示 1~6 级标题</p>
+<h1 id="Markdown-语法一揽子计划"><a href="#Markdown-语法一揽子计划" class="headerlink" title="Markdown 语法一揽子计划"></a>Markdown 语法一揽子计划</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 <code>#</code>表示 1~6 级标题</p>
 <blockquote>
 <p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
 </blockquote>
-<a id="more"></a>
-
 <p>效果：</p>
 <blockquote>
 <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
@@ -192,16 +192,21 @@
 <pre><code>public static void main(String args[])
 {
     System.out.println(&quot;Hello World&quot;);
-}</code></pre><p><strong>注意</strong>：需要和普通段落之间存在空行</p>
+}</code></pre><p><strong>注意</strong>：此时需要与普通段落之间存在空行</p>
+<p><strong>或者</strong>使用```包裹代码，如下：</p>
+<blockquote>
+<p>```java<br>public static void main(String args[])<br> {<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(“Hello World”);<br> }<br>```</p>
+</blockquote>
+<p><strong>注意</strong>：```后面紧跟展示代码所使用的语言，如 java、javascript、python、shell 等</p>
 <h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><p>在强调内容两侧分别加上 <code>*</code> 或者 <code>_</code></p>
 <blockquote>
-<p>*斜体*，_斜体_<br>**粗体**，__粗体__<br>**_斜体+粗体_**</p>
+<p>`标记`<br>*斜体*，_斜体_<br>**粗体**，__粗体__<br>**_斜体+粗体_**</p>
 </blockquote>
 <p>效果：</p>
 <blockquote>
-<p><em>斜体<em>，</em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong><br><strong><em>斜体+粗体</em></strong></p>
+<p><code>标记</code><br><em>斜体<em>，</em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong><br><strong><em>斜体+粗体</em></strong></p>
 </blockquote>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>使用·、+、或-标记无序列表，可嵌套</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，可嵌套</p>
 <blockquote>
 <p>- 第一项<br>- 第二项<br>- 第三项</p>
 </blockquote>
@@ -213,7 +218,7 @@
 <li>第三项</li>
 </ul>
 </blockquote>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表的标记方式是序号 + <code>.</code></p>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表的标记方式是序号后面加<code>.</code></p>
 <blockquote>
 <p>1. 第一项<br>2. 第二项<br>3. 第三项</p>
 </blockquote>
@@ -231,9 +236,9 @@
 <p>效果：</p>
 <blockquote>
 <ul>
-<li><input disabled type="checkbox"> a  </li>
-<li><input checked disabled type="checkbox"> b  </li>
-<li><input disabled type="checkbox"> c  </li>
+<li><input disabled type="checkbox"> a</li>
+<li><input checked disabled type="checkbox"> b</li>
+<li><input disabled type="checkbox"> c</li>
 <li><input checked disabled type="checkbox"> d</li>
 </ul>
 </blockquote>
@@ -245,16 +250,29 @@
 <p>[Google](<a href="https://www.google.com" target="_blank" rel="noopener">https://www.google.com</a> “谷歌搜索”)</p>
 </blockquote>
 <p>效果：</p>
+<blockquote>
 <p><a href="https://www.google.com" title="谷歌搜索" target="_blank" rel="noopener">Google</a></p>
+</blockquote>
 <h3 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h3><blockquote>
 <p>[Google][1]<br>[Baidu][2]</p>
 <p>[1]: <a href="https://www.google.com" target="_blank" rel="noopener">https://www.google.com</a> “谷歌搜索”<br>[2]: <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> “百度一下”</p>
 </blockquote>
 <p>效果：</p>
+<blockquote>
 <p><a href="https://www.google.com" title="谷歌搜索" target="_blank" rel="noopener">Google</a><br><a href="https://www.baidu.com" title="百度一下" target="_blank" rel="noopener">Baidu</a></p>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>插入图片和插入链接类似，只是需要在链接的基础上添加一个 <code>!</code></p>
-<p><strong>另</strong>：图片居中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line">![](url)</span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>插入图片和插入链接类似，只是需要在链接的基础上前面加一个 <code>!</code></p>
+<blockquote>
+<p>![icon](<a href="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png" target="_blank" rel="noopener">https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png</a> “icon”)</p>
+</blockquote>
+<p>效果：</p>
+<center>
+
+<p><img src="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png" alt="icon" title="icon"></p>
+</center>
+
+<p><strong>另</strong>：使用&lt;center&gt;&lt;/center&gt;嵌套使图片居中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line"></span><br><span class="line">![](url)</span><br><span class="line"></span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>用 <code>|</code> 表示表格纵向边界，表头和表内容用 <code>-</code> 隔开，并可用 <code>:</code> 进行对齐设置——两边都有 <code>:</code> 则表示居中，若不加 <code>:</code> 则默认左对齐</p>
 <blockquote>
@@ -277,21 +295,32 @@
 <td align="center"><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></td>
 </tr>
 </tbody></table>
-<h2 id="表情"><a href="#表情" class="headerlink" title="表情"></a>表情</h2><h3 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h3><p>目前 Emoji 已经支持大部分应用场景，当然也适用于 Markdown😆</p>
+<h2 id="表情"><a href="#表情" class="headerlink" title="表情"></a>表情</h2><h3 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h3><p>目前 Emoji 已经支持大部分文本输入场景，当然也适用于 Markdown😆</p>
 <p><strong>注意</strong>：Emoji 表情在不同设备、不同软件、不同浏览器显示会有所不同</p>
-<p>随便附上几个（直接选中复制、粘贴就 OK），更多可以参考 <a href="https://copy.emojiall.com/zh-hans/" target="_blank" rel="noopener">https://copy.emojiall.com/zh-hans/</a></p>
+<p>随便附上几个（直接选中复制、粘贴就 OK），更多可以参考 <a href="https://copy.emojiall.com/zh-hans/" title="Emoji All" target="_blank" rel="noopener">Emoji All</a></p>
 <p>😀 😃 😄 😁 😆 😅 😂 😋 😒 😏 🙃 🙂 😐 😑 ⭐ 🌟 ✨ 🔥</p>
 <h3 id="符号表情"><a href="#符号表情" class="headerlink" title="符号表情"></a>符号表情</h3><p>山顶洞人用的表情包 ʕ •ᴥ•ʔ</p>
 <p>( ´◔ ‸◔`)</p>
-<p>⊙▂⊙　⊙０⊙　⊙︿⊙　⊙ω⊙　⊙﹏⊙　⊙△⊙　⊙▽⊙</p>
-<p>∩▂∩　∩０∩　∩︿∩　∩ω∩　∩﹏∩　∩△∩　∩▽∩</p>
-<p>●▂●　　●０●　　●︿●　　●ω●　　●﹏●　　●△● 　●▽●</p>
-<p>∪▂∪　∪０∪　∪︿∪　∪ω∪　∪﹏∪　∪△∪　∪▽∪</p>
-<p>≧▂≦　≧０≦　≧︿≦　≧ω≦　≧﹏≦　≧△≦　≧▽≦</p>
-<p>＞▂＜　＞０＜　＞︿＜　＞ω＜　＞﹏＜　＞△＜　＞▽＜</p>
+<p>⊙▂⊙ 　 ⊙ ０ ⊙ 　 ⊙︿⊙ 　 ⊙ω⊙ 　 ⊙﹏⊙ 　 ⊙△⊙ 　 ⊙▽⊙</p>
+<p>∩▂∩ 　 ∩ ０ ∩ 　 ∩︿∩ 　 ∩ω∩ 　 ∩﹏∩ 　 ∩△∩ 　 ∩▽∩</p>
+<p>●▂● 　　 ● ０ ● 　　 ●︿● 　　 ●ω● 　　 ●﹏● 　　 ●△● 　 ●▽●</p>
+<p>∪▂∪ 　 ∪ ０ ∪ 　 ∪︿∪ 　 ∪ω∪ 　 ∪﹏∪ 　 ∪△∪ 　 ∪▽∪</p>
+<p>≧▂≦ 　 ≧ ０ ≦ 　 ≧︿≦ 　 ≧ω≦ 　 ≧﹏≦ 　 ≧△≦ 　 ≧▽≦</p>
+<p>＞ ▂ ＜　＞０＜　＞︿＜　＞ ω ＜　＞﹏＜　＞ △ ＜　＞ ▽ ＜</p>
 <blockquote>
 <p>参考链接： <a href="https://www.douban.com/note/227408401/" title="标点符号表情大全" target="_blank" rel="noopener">标点符号表情大全</a></p>
 </blockquote>
+<h2 id="折叠内容"><a href="#折叠内容" class="headerlink" title="折叠内容"></a>折叠内容</h2><blockquote>
+<p>&lt;details&gt;<br>&lt;summary&gt;Title（点击展开隐藏内容）&lt;/summary&gt;</p>
+<p>content</p>
+<p>&lt;/details&gt;</p>
+</blockquote>
+<p>效果：</p>
+<details>
+<summary>Title（点击展开隐藏内容）</summary>
+
+<p>content</p>
+</details>
 
       
 
@@ -388,7 +417,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 深刻
+    		&copy; 2020 深刻
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten -->
@@ -482,15 +511,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
