@@ -17,7 +17,7 @@
 <meta property="og:description" content="原文链接（from CSDN） 标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png">
-<meta property="og:updated_time" content="2020-01-18T08:42:10.700Z">
+<meta property="og:updated_time" content="2020-01-26T03:08:26.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown 语法一揽子计划（超详细）">
 <meta name="twitter:description" content="原文链接（from CSDN） 标题使用 #表示 1~6 级标题  # 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题">
@@ -175,9 +175,7 @@
 <a id="more"></a>
 
 <p>效果：</p>
-<blockquote>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
-<h2 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h2><p>使用 <code>&gt;</code>表示引用</p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h2 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h2><p>使用 <code>&gt;</code> 表示引用</p>
 <blockquote>
 <p>&gt; 区块引用<br>&gt;&gt; 嵌套引用</p>
 </blockquote>
@@ -195,55 +193,46 @@
 {
     System.out.println(&quot;Hello World&quot;);
 }</code></pre><p><strong>注意</strong>：此时需要与普通段落之间存在空行</p>
-<p><strong>或者</strong>使用```包裹代码，如下：</p>
+<p><strong>或者</strong>，使用```包裹代码（推荐），如下：</p>
 <blockquote>
 <p>```java<br>public static void main(String args[])<br> {<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(“Hello World”);<br> }<br>```</p>
 </blockquote>
 <p><strong>注意</strong>：```后面紧跟展示代码所使用的语言，如 java、javascript、python、shell 等</p>
-<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><p>在强调内容两侧分别加上 <code>*</code> 或者 <code>_</code></p>
-<blockquote>
-<p>`标记`<br>*斜体*，_斜体_<br>**粗体**，__粗体__<br>**_斜体+粗体_**</p>
+<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><blockquote>
+<p>`标记`<br>*斜体*，_斜体_<br>**粗体**，__粗体__<br>**_斜体+粗体_**<br>&lt;u&gt;下划线&lt;/u&gt;</p>
 </blockquote>
 <p>效果：</p>
-<blockquote>
-<p><code>标记</code><br><em>斜体<em>，</em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong><br><strong><em>斜体+粗体</em></strong></p>
-</blockquote>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，可嵌套</p>
+<p><code>标记</code><br><em>斜体<em>，</em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong><br><strong><em>斜体+粗体</em></strong><br><u>下划线</u></p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>使用 <code>·</code> 、<code>+</code> 、或 <code>-</code> 标记无序列表，可嵌套</p>
 <blockquote>
 <p>- 第一项<br>- 第二项<br>- 第三项</p>
 </blockquote>
 <p>效果：</p>
-<blockquote>
 <ul>
 <li>第一项</li>
 <li>第二项</li>
 <li>第三项</li>
 </ul>
-</blockquote>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表的标记方式是序号后面加<code>.</code></p>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表的标记方式是序号后面加 <code>.</code></p>
 <blockquote>
 <p>1. 第一项<br>2. 第二项<br>3. 第三项</p>
 </blockquote>
 <p>效果：</p>
-<blockquote>
 <ol>
 <li>第一项</li>
 <li>第二项</li>
 <li>第三项</li>
 </ol>
-</blockquote>
 <h2 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h2><blockquote>
 <p>- [ ] a<br>- [x] b<br>- [ ] c<br>- [x] d</p>
 </blockquote>
 <p>效果：</p>
-<blockquote>
 <ul>
 <li><input disabled type="checkbox"> a</li>
 <li><input checked disabled type="checkbox"> b</li>
 <li><input disabled type="checkbox"> c</li>
 <li><input checked disabled type="checkbox"> d</li>
 </ul>
-</blockquote>
 <h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>使用三个或以上 <code>*</code> 、 <code>-</code> 、 <code>_</code></p>
 <p>效果：</p>
 <hr>
@@ -252,17 +241,13 @@
 <p>[Google](<a href="https://www.google.com" target="_blank" rel="noopener">https://www.google.com</a> “谷歌搜索”)</p>
 </blockquote>
 <p>效果：</p>
-<blockquote>
 <p><a href="https://www.google.com" title="谷歌搜索" target="_blank" rel="noopener">Google</a></p>
-</blockquote>
 <h3 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h3><blockquote>
 <p>[Google][1]<br>[Baidu][2]</p>
 <p>[1]: <a href="https://www.google.com" target="_blank" rel="noopener">https://www.google.com</a> “谷歌搜索”<br>[2]: <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> “百度一下”</p>
 </blockquote>
 <p>效果：</p>
-<blockquote>
 <p><a href="https://www.google.com" title="谷歌搜索" target="_blank" rel="noopener">Google</a><br><a href="https://www.baidu.com" title="百度一下" target="_blank" rel="noopener">Baidu</a></p>
-</blockquote>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>插入图片和插入链接类似，只是需要在链接的基础上前面加一个 <code>!</code></p>
 <blockquote>
 <p>![icon](<a href="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png" target="_blank" rel="noopener">https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png</a> “icon”)</p>
@@ -273,9 +258,12 @@
 <p><img src="https://gitee.com/profoundly/data/raw/master/shenke/shenke_circle_small.png" alt="icon" title="icon"></p>
 </center>
 
-<p><strong>另</strong>：使用&lt;center&gt;&lt;/center&gt;嵌套使图片居中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line"></span><br><span class="line">![](url)</span><br><span class="line"></span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
-
+<p><strong>另</strong>：使用 <code>&lt;center&gt;&lt;/center&gt;</code> 嵌套使图片居中：</p>
+<blockquote>
+<p>&lt;center&gt;</p>
+<p>![](url)</p>
+<p>&lt;/center&gt;</p>
+</blockquote>
 <h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>用 <code>|</code> 表示表格纵向边界，表头和表内容用 <code>-</code> 隔开，并可用 <code>:</code> 进行对齐设置——两边都有 <code>:</code> 则表示居中，若不加 <code>:</code> 则默认左对齐</p>
 <blockquote>
 <p>| 表头 | 内容 |<br>| :—-: | :———————-: |<br>| Google | <a href="https://www.google.com" target="_blank" rel="noopener">https://www.google.com</a> |<br>| Baidu | <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> |</p>
@@ -297,6 +285,12 @@
 <td align="center"><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></td>
 </tr>
 </tbody></table>
+<h2 id="注脚"><a href="#注脚" class="headerlink" title="注脚"></a>注脚</h2><blockquote>
+<p>一个具有注脚的文本。[^1]</p>
+<p>[^1]: 注脚的解释</p>
+</blockquote>
+<p>效果：</p>
+<p>一个具有注脚的文本。<a href="注脚的解释">^1</a></p>
 <h2 id="表情"><a href="#表情" class="headerlink" title="表情"></a>表情</h2><h3 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h3><p>目前 Emoji 已经支持大部分文本输入场景，当然也适用于 Markdown😆</p>
 <p><strong>注意</strong>：Emoji 表情在不同设备、不同软件、不同浏览器显示会有所不同</p>
 <p>随便附上几个（直接选中复制、粘贴就 OK），更多可以参考 <a href="https://copy.emojiall.com/zh-hans/" title="Emoji All" target="_blank" rel="noopener">Emoji All</a></p>
@@ -324,7 +318,10 @@
 <p>content</p>
 </details>
 
-<p><strong>注意</strong>：部分场景可能不支持该语法，不过在 vs code、github 等场景可以正常显示</p>
+<p><strong>注意</strong>：部分场景（如 CSDN）可能不支持该语法，不过在 vs code、github 等场景可以正常显示</p>
+<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><blockquote>
+<p>详细数学公式语法，链接：<a href="https://blog.csdn.net/qq_38105251/article/details/104085282" target="_blank" rel="noopener">Markdown 语法之数学公式（from CSDN）</a></p>
+</blockquote>
 
       
 
@@ -375,6 +372,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/01/26/markdown-math/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Markdown 语法之数学公式
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/01/max-subarray/" id="article-nav-older" class="article-nav-link-wrap">
@@ -564,15 +570,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
               </li>
             
             <div class="clearfix"></div>
