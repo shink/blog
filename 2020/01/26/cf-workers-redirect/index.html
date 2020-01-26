@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers2.png">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers3.png">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers4.png">
-<meta property="og:updated_time" content="2020-01-26T14:59:57.706Z">
+<meta property="og:updated_time" content="2020-01-26T15:03:09.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cloudflare Workers 实现网址跳转">
 <meta name="twitter:description" content="本文将介绍如何使用 Node.js 基于 Cloudflare Workers 实现一个网址跳转服务，并支持自定义域名 原文链接（from CSDN） Cloudflare Workers 在边缘运行代码，提供强大的 Web 可扩展性  在边缘应用 自定义安全规则 和 过滤逻辑 来检测恶意 Bots 病毒并防止它们消耗资源，从而提高安全性。  将更多个性化和交互性纳入静态 HTML 页面，并在边缘">
@@ -208,7 +208,7 @@
 
 <p>然后是配置 route，可以使用通配符</p>
 <p align="center">
-    <img src="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers4.png" width="80%">
+    <img src="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers4.png" width="50%">
 </p>
 
 <p><strong>注意</strong>：如果是二级域名，需要先给这个二级域名添加一条 CNAME 记录，否则跳转会有问题。CNAME 记录的内容理论上可以随便写，因为 Worker 会在 CNAME 之前拦截请求，只有未被拦截的才会走 CNAME 记录的地址</p>
@@ -433,19 +433,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -462,6 +458,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
             
             <div class="clearfix"></div>
