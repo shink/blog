@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cloudflare Workers 实现301网址跳转 - 深刻的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.css" rel="stylesheet">
+    <meta name="keywords" content="Shenke, Blog,"> 
+    <meta name="description" content="本文将介绍如何使用 Node.js 基于 Cloudflare Workers 实现一个网址跳转服务，并支持自定义域名
+原文链接（from CSDN）
+ Cloudflare Workers
+
+
+在,"> 
+    <meta name="author" content="深刻"> 
+    <link rel="alternative" href="atom.xml" title="深刻的博客" type="application/atom+xml"> 
+    <link rel="icon" href="https://gitee.com/sculpta/data/raw/master/shenke/shenke_circle_small.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/animate.css">
+
+    
+<link rel="stylesheet" href="/css/fira_code.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+          // No more ads!
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script> -->
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">深刻的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block; display: block;position: fixed; top: 0px;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://blog.tsund.cn"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Cloudflare Workers 实现301网址跳转</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div style="font-size: 1rem;margin-right: -10px">
+          分享此文：
+        </div>
+        <div>
+          <div class="share">
+              <a title="获取文章地址二维码" class="icon-scan" href="javascript:;"></a>
+          </div>
+          <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section" style="margin-top: 50px">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Cloudflare Workers 实现301网址跳转</h1>
+        <div class="stuff">
+            <span>一月 26, 2020</span>
+            <span id="busuanzi_container_page_pv" class="busuanzi_page" style="display:none">本文总阅读量<div id="busuanzi_value_page_pv" style="display: inline;">1</div>次</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Cloudflare-Workers/" rel="tag">Cloudflare Workers</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+
+        </div>
+        <div class="low-resolution-warn-info">当前设备屏幕尺寸过小，推荐使用PC模式浏览。</div>
+        <div class="content markdown">
+            <p>本文将介绍如何使用 Node.js 基于 Cloudflare Workers 实现一个网址跳转服务，并支持自定义域名</p>
+<p><a href="https://blog.csdn.net/qq_38105251/article/details/104090088" target="_blank" rel="noopener" title="原文链接">原文链接（from CSDN）</a></p>
+<h2 id="cloudflare-workers"><a class="markdownIt-Anchor" href="#cloudflare-workers"></a> Cloudflare Workers</h2>
+<ul>
+<li>
+<p>在边缘运行代码，提供强大的 Web 可扩展性</p>
+</li>
+<li>
+<p>在边缘应用 <u>自定义安全规则</u> 和 <u>过滤逻辑</u> 来检测恶意 Bots 病毒并防止它们消耗资源，从而提高安全性。</p>
+</li>
+<li>
+<p>将更多个性化和交互性纳入静态 HTML 页面，并在边缘运行动态请求，从而改善用户体验。</p>
+</li>
+<li>
+<p>将更多操作流程和请求处理转移到边缘，以提高缓存命中率并降低带宽成本，从而降低运营成本。</p>
+</li>
+</ul>
+<blockquote>
+<p>Cloudflare Workers 可以通过自定义安全规则和过滤逻辑来提高网站的安全性，因此，<code>我们可以通过 t.domain1.com\blog 301重定向到真实地址，如：blog.domain2.com</code>，达到隐藏真实地址的目的</p>
+</blockquote>
+<h2 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h2>
+<h3 id="1-创建-workers"><a class="markdownIt-Anchor" href="#1-创建-workers"></a> 1. 创建 Workers</h3>
+<p align="center">
+    <img src="https://gitee.com/sculpta/data/raw/master/blog/cf-workers-redirect/workers1.png" width="80%">
+</p>
+<p>点击创建 Worker</p>
+<p align="center">
+    <img src="https://gitee.com/sculpta/data/raw/master/blog/cf-workers-redirect/workers2.png" width="80%">
+</p>
+<p>代码的主要思想是：对于诸如 <strong><a href="http://to.domain1.com/blog" target="_blank" rel="noopener">to.domain1.com/blog</a></strong> 这样的请求，截取 <code>/</code> 后面的内容并查询 <strong>redirectMap</strong>，然后 301 跳转到相应网址，如 <strong><a href="http://blog.domain2.com" target="_blank" rel="noopener">blog.domain2.com</a></strong></p>
+<p>代码如下，只需要根据需求自己修改 <strong>redirectMap</strong> 的内容就行了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">handleRequest</span>(<span class="params">request</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> requestURL = <span class="keyword">new</span> URL(request.url)</span><br><span class="line">  <span class="keyword">let</span> path = requestURL.pathname.split(<span class="string">'/'</span>)[<span class="number">1</span>]</span><br><span class="line">  <span class="keyword">let</span> location = redirectMap[path]</span><br><span class="line">  <span class="keyword">if</span> (location) &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(location, <span class="number">301</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> fetch(request)</span><br><span class="line">&#125;</span><br><span class="line">addEventListener(<span class="string">'fetch'</span>, <span class="keyword">async</span> event =&gt; &#123;</span><br><span class="line">  event.respondWith(handleRequest(event.request))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> redirectMap = &#123;</span><br><span class="line">  blog: <span class="string">'https://blog.tsund.cn/'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-自定义域名"><a class="markdownIt-Anchor" href="#2-自定义域名"></a> 2. 自定义域名</h3>
+<p><strong>注意</strong>：要使用的域名必须是由 Cloudflare 管理的</p>
+<p>进入 Cloudflare 的域名界面后，点击 Workers 标签，并添加一条 route</p>
+<p align="center">
+    <img src="https://gitee.com/sculpta/data/raw/master/blog/cf-workers-redirect/workers3.png" width="80%">
+</p>
+<p>然后是配置 route，可以使用通配符</p>
+<p align="center">
+    <img src="https://gitee.com/sculpta/data/raw/master/blog/cf-workers-redirect/workers4.png" width="50%">
+</p>
+<p><strong>注意</strong>：如果是二级域名，需要先给这个二级域名添加一条 CNAME 记录，否则跳转会有问题。CNAME 记录的内容理论上可以随便写，因为 Worker 会在 CNAME 之前拦截请求，只有未被拦截的才会走 CNAME 记录的地址</p>
+<p>至此，就实现了通过 Cloudflare Workers 实现 301 网址跳转，达到隐藏目标网址的目的</p>
+<p>如：<a href="https://t.shenke.codes/blog" target="_blank" rel="noopener" title="点击跳转">https://t.shenke.codes/blog</a> 会跳转到 <code>https://blog.tsund.cn</code></p>
+<hr />
+<p><code>更新</code>：如果 CNAME 记录指向的是 GitHub Pages 的页面，可能出现 404 错误，这时可以通过修改 Workers 的代码来自定义 301 重定向规则。这样对于所有的请求就都经 Cloudflare Workers 处理，因此 CNAME 记录就可以删掉了。修改后的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">handleRequest</span>(<span class="params">request</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> requestURL = <span class="keyword">new</span> URL(request.url)</span><br><span class="line">  <span class="keyword">let</span> path = requestURL.pathname.split(<span class="string">'/'</span>)[<span class="number">1</span>]</span><br><span class="line">  <span class="keyword">let</span> location = redirectMap[path]</span><br><span class="line">  <span class="keyword">if</span> (location) &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(location, <span class="number">301</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(path === <span class="string">''</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(<span class="string">'https://tsund.cn/'</span>, <span class="number">301</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(<span class="string">'https://tsund.cn/404/'</span>, <span class="number">301</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">addEventListener(<span class="string">'fetch'</span>, <span class="keyword">async</span> event =&gt; &#123;</span><br><span class="line">  event.respondWith(handleRequest(event.request))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> redirectMap = &#123;</span><br><span class="line">  blog: <span class="string">'https://blog.tsund.cn/'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，访问 <a href="https://t.shenke.codes" target="_blank" rel="noopener" title="点击跳转">https://t.shenke.codes</a> 就会跳转到 <code>https://tsund.cn</code>，并且对于 <strong>redirectMap</strong> 中尚未定义的跳转规则，会跳转到自定义的 404 页面，从而提高用户浏览体验</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/jinyecheng.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/juhuatai.mp3'></li>
+                        
+                    
+                        
+                            <li title='2' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/MapleStory.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <!--下悬浮返回键-->
+    <div style="background: white; height:30px; width: 30px; border-radius: 16px; position: fixed; bottom: 1.5rem; right: 1.5rem; border: 2px solid rgba(0, 0, 0, 0.5)">
+      <a class="icon-left image-icon" style="left:4px; top:4px" href="javascript:history.back()"></a>
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>记录整数反转的溢出问题 - 深刻的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.css" rel="stylesheet">
+    <meta name="keywords" content="Shenke, Blog,"> 
+    <meta name="description" content=" Record Leetcode simple problem: Reverse Integer
+给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。注意：假设我们的环境只能存储,"> 
+    <meta name="author" content="深刻"> 
+    <link rel="alternative" href="atom.xml" title="深刻的博客" type="application/atom+xml"> 
+    <link rel="icon" href="https://gitee.com/sculpta/data/raw/master/shenke/shenke_circle_small.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/animate.css">
+
+    
+<link rel="stylesheet" href="/css/fira_code.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+          // No more ads!
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script> -->
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">深刻的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block; display: block;position: fixed; top: 0px;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://blog.tsund.cn"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">记录整数反转的溢出问题</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div style="font-size: 1rem;margin-right: -10px">
+          分享此文：
+        </div>
+        <div>
+          <div class="share">
+              <a title="获取文章地址二维码" class="icon-scan" href="javascript:;"></a>
+          </div>
+          <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section" style="margin-top: 50px">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">记录整数反转的溢出问题</h1>
+        <div class="stuff">
+            <span>十月 07, 2019</span>
+            <span id="busuanzi_container_page_pv" class="busuanzi_page" style="display:none">本文总阅读量<div id="busuanzi_value_page_pv" style="display: inline;">1</div>次</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+
+        </div>
+        <div class="low-resolution-warn-info">当前设备屏幕尺寸过小，推荐使用PC模式浏览。</div>
+        <div class="content markdown">
+            <h2 id="record-leetcode-simple-problem-reverse-integer"><a class="markdownIt-Anchor" href="#record-leetcode-simple-problem-reverse-integer"></a> Record Leetcode simple problem: Reverse Integer</h2>
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。<strong>注意</strong>：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [Integer.<em><code>MIN_VALUE</code></em>, Integer.<em><code>MAX_VALUE</code></em>]。请根据这个假设，如果反转后整数溢出那么就返回 0</p>
+<h2 id="thought"><a class="markdownIt-Anchor" href="#thought"></a> Thought</h2>
+<ul>
+<li>
+<p>先不考虑溢出问题，对整数取反很简单，先把 x 不断对 10 取余，然后 result 乘 10 加上余数覆盖掉原来的 result，最后 x /= 10</p>
+</li>
+<li>
+<p>对于溢出问题，就需要判断最终得到的 result 的范围是否合法，而问题是如果 result 已经溢出，那么 result 就不能是 int 类型，要扩充一下的它的存储空间，让它表示比 int 还要大的数，那么它的类型就必须是 long（<em>我没想到这点，提交了三遍都不对，最后看了评论才悟出来…</em>）</p>
+</li>
+<li>
+<p>另外，官方给出的答案有点复杂的味道：</p>
+</li>
+</ul>
+<p align="center" width="600">
+    <img src="https://gitee.com/sculpta/data/raw/master/blog/reverse-integer/reverse-integer.png">
+</p>
+<blockquote>
+<p>图源来自 Leetcode 官方答案，链接：<a href="https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode/</a></p>
+</blockquote>
+<p>其实个人感觉才是最稳妥最万能的做法，因为如果按刚才的做法，用一个 long 类型来保存结果，那如果题目改成是对 long 类型的数进行取反呢，再去用 long long 类型保存结果吗，但是对于这个题目来说这确实是最巧妙的解法了</p>
+<h2 id="java-codes"><a class="markdownIt-Anchor" href="#java-codes"></a> Java Codes</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 用long类型判断溢出</span></span><br><span class="line">		<span class="keyword">long</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (x != <span class="number">0</span>) &#123;</span><br><span class="line">			result = result * <span class="number">10</span> + x % <span class="number">10</span>;</span><br><span class="line">			x /= <span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> (<span class="keyword">int</span>) ((result &gt;= Integer.MIN_VALUE &amp;&amp; result &lt;= Integer.MAX_VALUE) ? result : <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="notes"><a class="markdownIt-Anchor" href="#notes"></a> Notes</h2>
+<blockquote>
+<p>Integer.MIN_VALUE(-2^31)： -2147483648<br />
+Integer.MAX_VALUE(2^31-1)： 2147483647</p>
+</blockquote>
+<blockquote>
+<p>函数 Math.pow(a, b)，返回的是 a 的 b 次方，类型是 Double<br />
+a ^ b 得到的也是 a 的 b 次方，但是返回的是 Integer 类型</p>
+</blockquote>
+<blockquote>
+<p>原文链接（from CSDN）：<a href="https://blog.csdn.net/qq_38105251/article/details/102309986" target="_blank" rel="noopener">https://blog.csdn.net/qq_38105251/article/details/102309986</a></p>
+</blockquote>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/jinyecheng.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/juhuatai.mp3'></li>
+                        
+                    
+                        
+                            <li title='2' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/MapleStory.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <!--下悬浮返回键-->
+    <div style="background: white; height:30px; width: 30px; border-radius: 16px; position: fixed; bottom: 1.5rem; right: 1.5rem; border: 2px solid rgba(0, 0, 0, 0.5)">
+      <a class="icon-left image-icon" style="left:4px; top:4px" href="javascript:history.back()"></a>
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

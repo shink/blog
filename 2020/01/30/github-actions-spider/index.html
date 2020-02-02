@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GitHub Actions 部署爬虫并定时发送邮件 - 深刻的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.css" rel="stylesheet">
+    <meta name="keywords" content="Shenke, Blog,"> 
+    <meta name="description" content="本文将介绍如何在 GitHub Actions 上部署爬虫并定时发送邮件，无需额外购买服务器
+ GitHub Actions
+GitHub Actions 是在 GitHub Universe 大会,"> 
+    <meta name="author" content="深刻"> 
+    <link rel="alternative" href="atom.xml" title="深刻的博客" type="application/atom+xml"> 
+    <link rel="icon" href="https://gitee.com/sculpta/data/raw/master/shenke/shenke_circle_small.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/animate.css">
+
+    
+<link rel="stylesheet" href="/css/fira_code.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+          // No more ads!
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script> -->
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">深刻的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block; display: block;position: fixed; top: 0px;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://blog.tsund.cn"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">GitHub Actions 部署爬虫并定时发送邮件</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div style="font-size: 1rem;margin-right: -10px">
+          分享此文：
+        </div>
+        <div>
+          <div class="share">
+              <a title="获取文章地址二维码" class="icon-scan" href="javascript:;"></a>
+          </div>
+          <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section" style="margin-top: 50px">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">GitHub Actions 部署爬虫并定时发送邮件</h1>
+        <div class="stuff">
+            <span>一月 30, 2020</span>
+            <span id="busuanzi_container_page_pv" class="busuanzi_page" style="display:none">本文总阅读量<div id="busuanzi_value_page_pv" style="display: inline;">1</div>次</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/GitHub-Actions/" rel="tag">GitHub Actions</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+
+        </div>
+        <div class="low-resolution-warn-info">当前设备屏幕尺寸过小，推荐使用PC模式浏览。</div>
+        <div class="content markdown">
+            <p>本文将介绍如何在 GitHub Actions 上部署爬虫并定时发送邮件，无需额外购买服务器</p>
+<h2 id="github-actions"><a class="markdownIt-Anchor" href="#github-actions"></a> GitHub Actions</h2>
+<p>GitHub Actions 是在 GitHub Universe 大会上发布的，被 Github 主管 Sam Lambert 称为 “再次改变软件开发” 的一款重磅功能（“<em>we believe we will once again revolutionize software development.</em>”）。于 2018 年 10 月推出，内测了一段时间后，于 2019 年 11 月 13 日正式上线</p>
+<p>GitHub 会提供一个以下配置的服务器做为 runner：</p>
+<ul>
+<li>2-core CPU</li>
+<li>7 GB of RAM memory</li>
+<li>14 GB of SSD disk space</li>
+</ul>
+<p>（免费额度最多可以同时运行 20 个作业，心动了有木有💘）</p>
+<p>GitHub Actions 是一个 <code>CI/CD（持续集成/持续部署）</code>工具，持续集成由很多操作组成，比如 <strong>抓取代码</strong>、<strong>运行测试</strong>、<strong>登录远程服务器</strong>、<strong>发布到第三方服务</strong> 等等。GitHub 把这些操作统称为 actions</p>
+<p><u>actions 是 GitHub Actions 的核心，简单来说，它其实就是一段可以执行的代码</u>，可以用来做很多事情。比如，你在 python 3.7 环境下写了一个 python 项目放到了 GitHub 上，但是考虑到其他用户的生产环境各异，可能在不同的环境中运行结果都不一样，甚至无法安装，这时你总不能在自己电脑上把所有的 python 环境都测试一遍吧</p>
+<p>但是如果有了 GitHub Actions，你可以在 runner 服务器上部署一段 actions 代码来自动完成这项任务。你不仅可以指定它的操作系统（支持 Windows Server 2019、Ubuntu 18.04、Ubuntu 16.04 和 macOS Catalina 10.15），还可以指定触发时机、指定 python 版本、安装其他库等等</p>
+<p>此外，它还可以用来做很多有趣的事，比如当有人向仓库里提交 issue 时，给你的微信发一条消息；爬取课程表，每天早上准时发到你的邮箱；当向 master 分支提交代码时，自动构建 Docker 镜像并打上标签发布到 Docker Hub 上 ……</p>
+<p>慢慢的，你会发现很多操作在不同项目里面是类似的，完全可以共享。GitHub 也注意到了这一点，于是它允许开发者把每个操作写成独立的脚本文件，存放到代码仓库，使得其他开发者可以引用</p>
+<blockquote>
+<p><strong><code>总而言之，GitHub Actions 就是为我们提供了一个高效易用的 CI/CD（持续集成/持续部署）工作流，帮助我们自动构建、测试、部署我们的代码</code></strong></p>
+</blockquote>
+<p>具体的用法可以参考这些资料：</p>
+<ul>
+<li>
+<p>阮一峰老师的一篇文章：<a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html" target="_blank" rel="noopener">GitHub Actions 入门教程</a></p>
+</li>
+<li>
+<p>GitHub Actions 中文文档：<a href="https://help.github.com/cn/actions" target="_blank" rel="noopener">GitHub Actions Documentation</a></p>
+</li>
+<li>
+<p>GitHub Actions 官方市场：<a href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener">Actions Marketplace</a></p>
+</li>
+</ul>
+<p>熟悉了基本用法之后，本文将通过一个简单的爬虫例子，演示如何在 GitHub Actions 上部署爬虫，并定时发送邮件</p>
+<p>完整代码可以从 GitHub 仓库 <a href="https://github.com/sculpta/actions-bot" target="_blank" rel="noopener">sculpta/actions-bot</a> 获取，里面包含了几个基于 GitHub Actions 的小机器人</p>
+<h2 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h2>
+<p>爬虫内容就不细说了，这里以一个特别简单的例子为例——爬取 CSDN 用户的 profile 信息，即 <a href="https://blog.csdn.net/CSDN_ID" target="_blank" rel="noopener">https://blog.csdn.net/CSDN_ID</a> 这个页面中左边一栏的访问量、排名等信息，并定时发送到邮箱</p>
+<h3 id="1-准备爬虫"><a class="markdownIt-Anchor" href="#1-准备爬虫"></a> 1. 准备爬虫</h3>
+<p>可以先 fork 本仓库（推荐）或 clone</p>
+<p><code>git clone https://github.com/sculpta/actions-bot.git</code></p>
+<p>👇 修改 CSDN_ID</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">set -eux</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改为你的CSDN_ID</span></span><br><span class="line">CSDN_ID="qq_38105251"</span><br><span class="line"></span><br><span class="line">python csdn-emailbot/spider.py $CSDN_ID</span><br></pre></td></tr></table></figure>
+<h3 id="2-开通邮件免费发送服务"><a class="markdownIt-Anchor" href="#2-开通邮件免费发送服务"></a> 2. 开通邮件免费发送服务</h3>
+<p>以网易邮箱为例，选择「设置」中的 「POP3/SMTP/IMAP」，打上勾✔之后保存，然后设置密码</p>
+<p><strong>注意</strong>：该密码不能跟邮箱密码一致</p>
+<h3 id="3-配置-github-actions"><a class="markdownIt-Anchor" href="#3-配置-github-actions"></a> 3. 配置 GitHub Actions</h3>
+<p>触发 GitHub Actions 需要在项目仓库新建一个 .github/workflows 子目录，里面存放 YAML 格式配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: &#39;GitHub Actions CSDN Email Bot&#39;</span><br><span class="line"></span><br><span class="line">on:</span><br><span class="line">  push:</span><br><span class="line">    branches: </span><br><span class="line">      - master</span><br><span class="line">  schedule:</span><br><span class="line">    - cron: &#39;0 14 * * *&#39;</span><br></pre></td></tr></table></figure>
+<p>👆 上面代码中，<code>name</code> 是该配置文件的名字，<code>on</code> 是触发条件，我们指定两种情况下触发，第一种是向 master 分支 push 代码时触发，第二种是定时任务，每天在国际标准时间 14 点（北京时间 22 点）运行</p>
+<p>需要注意的是，必须使用 <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07" target="_blank" rel="noopener">POSIX cron 语法</a> 安排工作流程在特定的 UTC 时间（<strong>国际标准时间，等于北京时间减去 8 个小时</strong>）运行，并且最短间隔为每 5 分钟一次</p>
+<p>计划任务语法有五个字段，中间用空格分隔，每个字段代表一个时间单位</p>
+<blockquote>
+<p>┌───────────── minute (0 - 59)<br />
+│ ┌───────────── hour (0 - 23)<br />
+│ │ ┌───────────── day of the month (1 - 31)<br />
+│ │ │ ┌───────────── month (1 - 12 or JAN-DEC)<br />
+│ │ │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)<br />
+│ │ │ │ │<br />
+│ │ │ │ │<br />
+│ │ │ │ │<br />
+*  *  *  *  *</p>
+</blockquote>
+<p>可在这五个字段中使用以下运算符：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">任意值</td>
+<td style="text-align:center"><code>* * * * *</code> 在每天的每分钟运行</td>
+</tr>
+<tr>
+<td style="text-align:center">,</td>
+<td style="text-align:center">值列表分隔符</td>
+<td style="text-align:center"><code>2,10 4,5 * * *</code> 在每天第 4 和第 5 小时的第 2 和第 10 分钟运行</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">值的范围</td>
+<td style="text-align:center"><code>0 4-6 * * *</code> 在第 4、5、6 小时的第 0 分钟运行</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">步骤值</td>
+<td style="text-align:center"><code>20/15 * * * *</code> 从第 20 分钟到第 59 分钟每隔 15 分钟运行（第 20、35 和 50 分钟）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：GitHub 操作 不支持非标准语法 @yearly、@monthly、@weekly、@daily、@hourly 和 @reboot</p>
+</blockquote>
+<p>👇 接下来，定义了一个名为 csdn-emailbot 的 job，其中包含许多步骤，它们会按顺序依次执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jobs:</span><br><span class="line">  csdn-emailbot:</span><br><span class="line">    runs-on: ubuntu-latest</span><br><span class="line">    steps:</span><br><span class="line">      - name: Checkout</span><br><span class="line">        uses: actions&#x2F;checkout@v2</span><br></pre></td></tr></table></figure>
+<p>👆 上面代码中，<code>run-on</code> 字段指定当前 job 的运行环境为最新版的 ubuntu 系统。</p>
+<p>接下来的 steps 中，第一步是从当前仓库中获取代码，使用的是官方提供的 <a href="https://github.com/marketplace/actions/checkout" target="_blank" rel="noopener">checkout action</a> 的 2.0.0 版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- name: &#39;Set up Python&#39;</span><br><span class="line">  uses: actions&#x2F;setup-python@v1</span><br><span class="line">  with:</span><br><span class="line">    python-version: 3.7</span><br><span class="line">- name: &#39;Install dependencies&#39;</span><br><span class="line">  run: python -m pip install --upgrade pip</span><br><span class="line">- name: &#39;Install lib&#39;</span><br><span class="line">  run: |</span><br><span class="line">    pip install beautifulsoup4</span><br><span class="line">    pip install requests</span><br></pre></td></tr></table></figure>
+<p>👆 上面代码就是 <strong>部署爬虫环境</strong> 了，首先安装 python 3.7 的环境，然后安装 pip，最后通过 pip 安装所需要的 beautifulsoup4 和 requests</p>
+<p>👇 部署完环境后，就要执行我们写好的爬虫程序了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- name: &#39;Working&#39;</span><br><span class="line">  run: bash .&#x2F;csdn-emailbot&#x2F;main.sh</span><br></pre></td></tr></table></figure>
+<p>👇 最后，发送邮件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- name: &#39;Send mail&#39;</span><br><span class="line">  uses: dawidd6&#x2F;action-send-mail@master</span><br><span class="line">  with:</span><br><span class="line">    server_address: smtp.163.com</span><br><span class="line">    server_port: 465</span><br><span class="line">    username: $&#123;&#123; secrets.MAIL_USERNAME &#125;&#125;</span><br><span class="line">    password: $&#123;&#123; secrets.MAIL_PASSWORD &#125;&#125;</span><br><span class="line">    subject: CSDN Report</span><br><span class="line">    body: file:&#x2F;&#x2F;email.txt</span><br><span class="line">    to: shenkebug@qq.com</span><br><span class="line">    from: GitHub Actions</span><br><span class="line">    content_type: text&#x2F;plain</span><br></pre></td></tr></table></figure>
+<p>👆 上面代码中，使用了一个开发者写好的 <a href="https://github.com/dawidd6/action-send-mail" target="_blank" rel="noopener">发送邮件的 action</a>，其中需要注意的是，SMTP 服务器的用户名和密码使用的是加密变量，需要在仓库的「Settings」中设置「Secrets」，如下图所示：</p>
+<p align="center">
+    <img src="https://gitee.com/sculpta/data/raw/master/blog/github-actions-spider/img.png" width="80%">
+</p>
+<p>其中，<code>MAIL_USERNAME</code> 是你开通 SMTP 服务的邮箱，<code>MAIL_PASSWORD</code> 是你设置的 SMTP 服务的密码（<strong>不是邮箱的登录密码</strong>）</p>
+<p>最后，将 <code>to</code> 修改为你要接受邮件的邮箱地址</p>
+<p>👌 写好配置，推送到仓库以后，就可以每天晚上收到一封 CSDN profile 的邮件了</p>
+<hr />
+<p><code>另外</code>：<strong>GitHub Actions 貌似仅支持保存在工作流程运行过程中产生的文件，当作业完成时，运行程序会终止并删除虚拟环境的实例，文件也会随之清空</strong></p>
+<p>如果想实现永久存储，可以利用仓库进行存储，<code>将要保存的文件 push 到仓库里，每次工作运行时再从仓库获取文件，再执行后面的逻辑即可</code></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/jinyecheng.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/juhuatai.mp3'></li>
+                        
+                    
+                        
+                            <li title='2' data-url='https://raw.githubusercontent.com/WhiteRobe/hexo-theme-diaspora/master/source/audio/MapleStory.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <!--下悬浮返回键-->
+    <div style="background: white; height:30px; width: 30px; border-radius: 16px; position: fixed; bottom: 1.5rem; right: 1.5rem; border: 2px solid rgba(0, 0, 0, 0.5)">
+      <a class="icon-left image-icon" style="left:4px; top:4px" href="javascript:history.back()"></a>
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
