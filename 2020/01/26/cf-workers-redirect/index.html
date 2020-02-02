@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers2.png">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers3.png">
 <meta property="og:image" content="https://gitee.com/profoundly/data/raw/master/blog/cf-workers-redirect/workers4.png">
-<meta property="og:updated_time" content="2020-01-26T15:03:09.413Z">
+<meta property="og:updated_time" content="2020-01-27T10:29:37.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cloudflare Workers 实现网址跳转">
 <meta name="twitter:description" content="本文将介绍如何使用 Node.js 基于 Cloudflare Workers 实现一个网址跳转服务，并支持自定义域名 原文链接（from CSDN） Cloudflare Workers 在边缘运行代码，提供强大的 Web 可扩展性  在边缘应用 自定义安全规则 和 过滤逻辑 来检测恶意 Bots 病毒并防止它们消耗资源，从而提高安全性。  将更多个性化和交互性纳入静态 HTML 页面，并在边缘">
@@ -213,7 +213,12 @@
 
 <p><strong>注意</strong>：如果是二级域名，需要先给这个二级域名添加一条 CNAME 记录，否则跳转会有问题。CNAME 记录的内容理论上可以随便写，因为 Worker 会在 CNAME 之前拦截请求，只有未被拦截的才会走 CNAME 记录的地址</p>
 <p>至此，就实现了通过 Cloudflare Workers 实现 301 网址跳转，达到隐藏目标网址的目的</p>
-<p>如：<a href="https://t.shenke.codes/blog" title="点击跳转" target="_blank" rel="noopener">https://t.shenke.codes/blog</a> 会跳转到 https://blog.tsund.cn/</p>
+<p>如：<a href="https://t.shenke.codes/blog" title="点击跳转" target="_blank" rel="noopener">https://t.shenke.codes/blog</a> 会跳转到 https://blog.tsund.cn</p>
+<hr>
+<p><code>更新</code>：如果 CNAME 记录指向的是 GitHub Pages 的页面，可能出现 404 错误，这时可以通过修改 Workers 的代码来自定义 301 重定向规则。这样对于所有的请求就都经 Cloudflare Workers 处理，因此 CNAME 记录就可以删掉了。修改后的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">handleRequest</span>(<span class="params">request</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> requestURL = <span class="keyword">new</span> URL(request.url)</span><br><span class="line">  <span class="keyword">let</span> path = requestURL.pathname.split(<span class="string">'/'</span>)[<span class="number">1</span>]</span><br><span class="line">  <span class="keyword">let</span> location = redirectMap[path]</span><br><span class="line">  <span class="keyword">if</span> (location) &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(location, <span class="number">301</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(path === <span class="string">''</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(<span class="string">'https://tsund.cn/'</span>, <span class="number">301</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(<span class="string">'https://tsund.cn/404/'</span>, <span class="number">301</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">addEventListener(<span class="string">'fetch'</span>, <span class="keyword">async</span> event =&gt; &#123;</span><br><span class="line">  event.respondWith(handleRequest(event.request))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> redirectMap = &#123;</span><br><span class="line">  blog: <span class="string">'https://blog.tsund.cn/'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，访问 <a href="https://t.shenke.codes" title="点击跳转" target="_blank" rel="noopener">https://t.shenke.codes</a> 就会跳转到 https://tsund.cn，并且对于 <strong>redirectMap</strong> 中尚未定义的跳转规则，会跳转到自定义的 404 页面，从而提高用户浏览体验</p>
 
       
 
@@ -425,6 +430,14 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -437,15 +450,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,10 +467,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
             
             <div class="clearfix"></div>
