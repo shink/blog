@@ -4,13 +4,16 @@
 
 - [tsund.cn](https://tsund.cn)
 
-- [CSDN](https://blog.csdn.net/sculpta)
+- [blog.csdn.net/sculpta](https://blog.csdn.net/sculpta)
 
 ## Branch
 
-- [typecho-bubble](https://github.com/shink/blog/tree/typecho-bubble)
+- [master](https://github.com/shink/blog/tree/master) -> typecho-bubble
 
 - [hexo-diaspora](https://github.com/shink/blog/tree/hexo-diaspora)
 
 - [hexo-yilia](https://github.com/shink/blog/tree/hexo-yilia)
 
+## Build Tool
+
+Docker Compose
