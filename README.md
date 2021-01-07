@@ -17,3 +17,7 @@
 ## Build Tool
 
 Docker Compose
+
+## License
+
+[Apache License 2.0](LISCENSE)
