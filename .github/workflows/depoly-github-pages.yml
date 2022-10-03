@@ -45,6 +45,10 @@ jobs:
       - name: Replace secrets
         run: |
           python bin/replace-secrets.py
+        env:
+          GITALK_CLIENT_ID: ${{ secrets.GITALK_CLIENT_ID }}
+          GITALK_CLIENT_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
+          SHARE_THIS_URL: ${{ secrets.SHARE_THIS_URL }}
 
       - name: Deploy
         id: deploy
