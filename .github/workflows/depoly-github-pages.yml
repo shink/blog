@@ -16,6 +16,11 @@ jobs:
           ref: hexo-icarus
           submodules: true
 
+      - name: Set up node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
       - name: Get npm cache directory
         id: npm-cache-dir
         run: |
@@ -32,7 +37,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci -f
+        run: npm ci
 
       - name: Set up Python
         uses: actions/setup-python@v4
