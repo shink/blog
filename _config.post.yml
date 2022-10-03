@@ -1,0 +1,3 @@
+# _config.post.yml中的配置对所有文章生效，将覆盖主题配置文件中的配置
+
+widgets: null

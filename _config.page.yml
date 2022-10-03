@@ -1,0 +1,15 @@
+# _config.page.yml中的配置对所有自定义页面生效，将覆盖主题配置文件中的配置
+
+#widgets: null
+#
+#  - type: recent_posts
+#    position: left
+#
+#  - type: categories
+#    position: left
+#
+#  - type: archives
+#    position: left
+#
+#  - type: tags
+#    position: left

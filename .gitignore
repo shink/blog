@@ -1,4 +1,12 @@
-html
-ssl
-mysql
-mysql.env
+.idea
+node_modules/
+public/
+.deploy*/
+
+.DS_Store
+Thumbs.db
+db.json
+_multiconfig.yml
+*.log
+*.example
+*.yml.*

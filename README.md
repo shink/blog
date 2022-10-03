@@ -1,23 +1,49 @@
-# Blog
+# Hexo Blog
 
-## Address
+- theme: [icarus](https://github.com/ppoffice/hexo-theme-icarus)
 
-- [tsund.cn](https://tsund.cn)
+## Install
 
-- [blog.csdn.net/sculpta](https://blog.csdn.net/sculpta)
+```shell
+npm install
+```
 
-## Branch
+## Create blog
 
-- [master](https://github.com/shink/blog/tree/master) -> typecho-bubble
+```shell
+hexo new blog-title
+```
 
-- [hexo-diaspora](https://github.com/shink/blog/tree/hexo-diaspora)
+```shell
+hexo new page page-name
+```
 
-- [hexo-yilia](https://github.com/shink/blog/tree/hexo-yilia)
+## Generate static pages
 
-## Build Tool
+```shell
+hexo clean && hexo g
+```
 
-Docker Compose
+View on [http://localhost:4000](http://localhost:4000)
+
+```shell
+hexo s
+```
+
+## Deploy
+
+1. Install deployer
+
+```shell
+npm install hexo-deployer-git --save
+```
+
+2. Deploy to GitHub Pages
+
+```shell
+hexo d
+```
 
 ## License
 
-[Apache License 2.0](LISCENSE)
+[MIT](LICENSE)
