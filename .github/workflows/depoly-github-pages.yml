@@ -34,9 +34,17 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.7
+
+      - name: Install pyyaml
+        run: pip install pyyaml
+
       - name: Replace secrets
         run: |
-          
+          python bin/replace-secrets.py
 
       - name: Deploy
         id: deploy

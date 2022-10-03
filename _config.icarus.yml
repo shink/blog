@@ -88,8 +88,8 @@ search:
 
 comment:
   type: gitalk
-  client_id: '2da0cf451625f1226d68'
-  client_secret: '9288d00c7b2b24e4921c5052dc9bef3918184ca7'
+  client_id: ''
+  client_secret: ''
   admin:
     - shink
   owner: shink
@@ -110,7 +110,7 @@ donates:
 
 share:
   type: sharethis
-  install_url: 'https://platform-api.sharethis.com/js/sharethis.js#property=633966102c87310019e279ac&product=inline-share-buttons'
+  install_url: ''
 
 sidebar:
   left:
