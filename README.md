@@ -8,7 +8,7 @@
 npm install
 ```
 
-## Create blog
+## Write blogs
 
 ```shell
 hexo new blog-title
@@ -31,14 +31,6 @@ hexo s
 ```
 
 ## Deploy
-
-1. Install deployer
-
-```shell
-npm install hexo-deployer-git --save
-```
-
-2. Deploy to GitHub Pages
 
 ```shell
 hexo d
