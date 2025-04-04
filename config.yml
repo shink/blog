@@ -1,0 +1,7 @@
+baseURL: "https://shink.github.io/blog/"
+languageCode: "en-us"
+title: "Yuanhao Ji's blog"
+theme: "hugo-bearblog"
+caches:
+  images:
+    dir: :cacheDir/images
