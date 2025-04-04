@@ -82,7 +82,7 @@ jobs:
           path: ./public
 
   deploy:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name != 'pull_request' }}
     name: Deploy
     runs-on: ubuntu-latest
     environment:
