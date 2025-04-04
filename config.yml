@@ -5,3 +5,20 @@ theme: "hugo-bearblog"
 caches:
   images:
     dir: :cacheDir/images
+enableRobotsTXT: true
+disableKinds:
+  - "taxonomy"
+ignoreErrors:
+  - "error-disable-taxonomy"
+permalinks:
+  blog: "/:slug/"
+  tags: "/blog/:slug/"
+params:
+  description: "Yuanhao Ji's blogs on AI, Machine Learning, and Data Science."
+  title: "Blog"
+  dateFormat: "2006-01-02"
+  hideMadeWithLine: true
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
